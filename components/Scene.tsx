@@ -8,7 +8,7 @@ import { useWorld } from "@/lib/store";
 import { cameraAt, BUILD_RANGES } from "@/lib/path";
 import { Ground } from "./city/Ground";
 import { District } from "./city/District";
-import { Building } from "./city/Building";
+import { AdoptTower } from "./city/AdoptTower";
 
 function ScrollDriver() {
   const setProgress = useWorld((s) => s.setProgress);
@@ -92,9 +92,9 @@ export default function Scene() {
         {/* Sheet 03 — Paris quarter */}
         <District centerZ={-200} depth={60} seed={77} range={BUILD_RANGES.paris} count={26} heights={[7, 12]} warmPalette={["#E8DCC8", "#DCD2BE", "#D4C8B0"]} litRatio={0.35} />
 
-        {/* Sheet 04 — Adopt tower placeholder (custom landmark comes next iteration) */}
-        <Building position={[0, 0, -272]} size={[10, 42, 10]} seed={7} range={BUILD_RANGES.adopt} warm="#F0E6D2" litRatio={0.85} windowScale={1.15} alwaysBuilt />
-        <District centerZ={-262} depth={44} seed={91} range={BUILD_RANGES.adopt} count={14} heights={[6, 18]} exclude={(x, z) => Math.abs(x) < 12 && Math.abs(z + 272) < 12} />
+        {/* Sheet 04 — the flagship */}
+        <AdoptTower />
+        <District centerZ={-260} depth={48} seed={91} range={BUILD_RANGES.adopt} count={14} heights={[6, 16]} exclude={(x, z) => Math.abs(x) < 14 && Math.abs(z + 270) < 15} />
 
         {/* Sheet 05 — Workshops lane */}
         <District centerZ={-318} depth={44} seed={55} range={BUILD_RANGES.workshops} count={16} heights={[3, 7]} avenueX={-8} litRatio={0.55} />

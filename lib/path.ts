@@ -12,9 +12,9 @@ const KEYS: Key[] = [
   { t: 0.32, pos: [0, 62, -132], look: [0, 48, -215] }, // above the clouds
   { t: 0.38, pos: [0, 28, -168], look: [0, 8, -208] }, // descend into Paris
   { t: 0.46, pos: [13, 8, -194], look: [-5, 10, -218] }, // Paris quarter
-  { t: 0.52, pos: [0, 10, -226], look: [0, 18, -264] }, // avenue toward the tower
-  { t: 0.6, pos: [17, 15, -243], look: [0, 20, -272] }, // Adopt three-quarter
-  { t: 0.68, pos: [6, 11, -252], look: [0, 17, -272] }, // close on the facade
+  { t: 0.52, pos: [0, 9, -212], look: [0, 24, -270] }, // full tower from the avenue
+  { t: 0.6, pos: [26, 20, -228], look: [0, 22, -270] }, // three-quarter hero, whole silhouette
+  { t: 0.68, pos: [3, 21, -245], look: [0, 21, -270] }, // facade panel medium shot
   { t: 0.74, pos: [-9, 8, -280], look: [-16, 6, -316] }, // turn into workshop lane
   { t: 0.82, pos: [-15, 7, -312], look: [-9, 5, -340] },
   { t: 0.88, pos: [-4, 9, -338], look: [0, 6, -370] },
