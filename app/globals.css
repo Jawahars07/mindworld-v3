@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: #0a1128;
+  color: #e8dcc8;
+  overscroll-behavior: none;
+}
+
+/* Blueprint title-block ruling */
+.titleblock {
+  border: 1px solid rgba(95, 212, 245, 0.45);
+  background: rgba(10, 17, 40, 0.72);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 0 4px rgba(10, 17, 40, 0.4), inset 0 0 24px rgba(95, 212, 245, 0.05);
+}
+.titleblock .rule {
+  border-top: 1px solid rgba(95, 212, 245, 0.25);
+}
+
+.hud-fade {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+::selection {
+  background: rgba(95, 212, 245, 0.35);
+}
+
+/* thin blueprint scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(95, 212, 245, 0.5);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
