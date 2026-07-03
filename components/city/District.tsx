@@ -1,6 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+import * as THREE from "three";
+import { useFrame } from "@react-three/fiber";
+import { useWorld } from "@/lib/store";
+import { buildOf } from "@/lib/path";
 import { Building, BuildingProps } from "./Building";
 
 // Procedural district: blocks flanking the avenue, deterministic per seed.
@@ -16,6 +20,78 @@ function rng(seed: number) {
   };
 }
 
+// Roof furniture appears only once its building has finished compiling.
+function RoofKit({
+  b,
+  children,
+}: {
+  b: BuildingProps;
+  children: React.ReactNode;
+}) {
+  const ref = useRef<THREE.Group>(null);
+  useFrame(() => {
+    if (ref.current)
+      ref.current.visible = buildOf(useWorld.getState().progress, b.range, b.delay ?? 0) > 0.96;
+  });
+  return (
+    <group ref={ref} position={[b.position[0], b.size[1], b.position[2]]}>
+      {children}
+    </group>
+  );
+}
+
+// Bengaluru rooftop: water tank on legs + stair headroom — the skyline texture
+// of every Indian low-rise.
+function BlrRoof({ b, r1, r2 }: { b: BuildingProps; r1: number; r2: number }) {
+  const w = b.size[0];
+  const d = b.size[2];
+  return (
+    <RoofKit b={b}>
+      {r1 > 0.35 && (
+        <group position={[w * 0.28, 0, d * 0.22]}>
+          <mesh position={[0, 0.85, 0]}>
+            <cylinderGeometry args={[0.75, 0.75, 1.1, 12]} />
+            <meshStandardMaterial color="#1C2436" roughness={0.9} />
+          </mesh>
+          <mesh position={[0, 0.15, 0]}>
+            <boxGeometry args={[1.1, 0.3, 1.1]} />
+            <meshStandardMaterial color="#2A3247" roughness={0.9} />
+          </mesh>
+        </group>
+      )}
+      {r2 > 0.4 && (
+        <mesh position={[-w * 0.24, 0.8, -d * 0.18]}>
+          <boxGeometry args={[1.6, 1.6, 1.9]} />
+          <meshStandardMaterial color={b.warm ?? "#D9B98C"} roughness={0.95} />
+        </mesh>
+      )}
+      {/* parapet lip */}
+      <mesh position={[0, 0.18, 0]}>
+        <boxGeometry args={[w + 0.25, 0.36, d + 0.25]} />
+        <meshStandardMaterial color="#3A3325" roughness={1} />
+      </mesh>
+    </RoofKit>
+  );
+}
+
+// Paris rooftop: zinc mansard frustum + chimney stack.
+function MansardRoof({ b, r1 }: { b: BuildingProps; r1: number }) {
+  const w = b.size[0];
+  const d = b.size[2];
+  return (
+    <RoofKit b={b}>
+      <mesh position={[0, 1.1, 0]} rotation-y={Math.PI / 4} scale={[w, 2.2, d]}>
+        <cylinderGeometry args={[Math.SQRT1_2 * 0.45, Math.SQRT1_2 * 1.02, 1, 4, 1]} />
+        <meshStandardMaterial color="#39435C" roughness={0.6} metalness={0.35} flatShading />
+      </mesh>
+      <mesh position={[w * (r1 > 0.5 ? 0.2 : -0.22), 2.6, d * 0.1]}>
+        <boxGeometry args={[0.5, 1.1, 0.5]} />
+        <meshStandardMaterial color="#2E3850" roughness={0.9} />
+      </mesh>
+    </RoofKit>
+  );
+}
+
 type DistrictProps = {
   centerZ: number;
   depth: number; // extent along z
@@ -27,6 +103,7 @@ type DistrictProps = {
   avenueX?: number;
   litRatio?: number;
   exclude?: (x: number, z: number) => boolean;
+  flavor?: "blr" | "paris" | "generic";
 };
 
 export function District({
@@ -40,6 +117,7 @@ export function District({
   avenueX = 0,
   litRatio = 0.4,
   exclude,
+  flavor = "generic",
 }: DistrictProps) {
   const buildings = useMemo(() => {
     const r = rng(seed);
@@ -72,9 +150,18 @@ export function District({
 
   return (
     <group>
-      {buildings.map((b, i) => (
-        <Building key={i} {...b} />
-      ))}
+      {buildings.map((b, i) => {
+        // deterministic per-building roof dice from its seed
+        const r1 = ((b.seed! * 7.13) % 1 + 1) % 1;
+        const r2 = ((b.seed! * 3.71) % 1 + 1) % 1;
+        return (
+          <group key={i}>
+            <Building {...b} />
+            {flavor === "blr" && <BlrRoof b={b} r1={r1} r2={r2} />}
+            {flavor === "paris" && <MansardRoof b={b} r1={r1} />}
+          </group>
+        );
+      })}
     </group>
   );
 }

@@ -10,6 +10,8 @@ import { Ground } from "./city/Ground";
 import { District } from "./city/District";
 import { AdoptTower } from "./city/AdoptTower";
 import { Crossing } from "./city/Crossing";
+import { Sign } from "./city/Sign";
+import { Building } from "./city/Building";
 
 function ScrollDriver() {
   const setProgress = useWorld((s) => s.setProgress);
@@ -87,14 +89,25 @@ export default function Scene() {
         <Stars />
         <Ground />
 
-        {/* Sheet 01 — Bengaluru quarter */}
-        <District centerZ={-60} depth={70} seed={41} range={BUILD_RANGES.bengaluru} count={30} heights={[4, 13]} warmPalette={["#E3C9A0", "#D9B98C", "#CFAE84", "#E8DCC8"]} litRatio={0.5} />
+        {/* soft night lighting for standard-material props (roof furniture etc.) */}
+        <ambientLight intensity={0.55} color="#8FA8C8" />
+        <directionalLight position={[40, 80, 20]} intensity={1.1} color="#CFE0F0" />
+
+        {/* Sheet 01 — Bengaluru quarter: chaotic low-rise, water tanks, headrooms */}
+        <District centerZ={-60} depth={70} seed={41} range={BUILD_RANGES.bengaluru} count={30} heights={[4, 11]} warmPalette={["#E3C9A0", "#D9B98C", "#CFAE84", "#E8DCC8"]} litRatio={0.5} flavor="blr" exclude={(x, z) => Math.abs(x + 16) < 7 && Math.abs(z + 46) < 8} />
+        {/* landmarks: campus + the CO2 ML lab (B.Tech project) */}
+        <Building position={[-16, 0, -46]} size={[9, 5.5, 7]} seed={3.3} range={BUILD_RANGES.bengaluru} delay={0.15} warm="#E8DCC8" litRatio={0.7} />
+        <Sign text="REVA UNIVERSITY" position={[-16, 6.8, -42.4]} width={7.5} visibleAfter={0.1} />
+        <Building position={[13, 0, -38]} size={[5, 3.6, 5]} seed={9.9} range={BUILD_RANGES.bengaluru} delay={0.3} warm="#D9C6A8" litRatio={0.8} />
+        <Sign text="CO₂ ML LAB" position={[13, 4.6, -35.4]} width={4.4} color="#5FD4F5" visibleAfter={0.12} />
 
         {/* Sheet 02 — the crossing */}
         <Crossing />
 
-        {/* Sheet 03 — Paris quarter */}
-        <District centerZ={-200} depth={60} seed={77} range={BUILD_RANGES.paris} count={26} heights={[7, 12]} warmPalette={["#E8DCC8", "#DCD2BE", "#D4C8B0"]} litRatio={0.35} />
+        {/* Sheet 03 — Paris quarter: uniform Haussmann heights, zinc mansards */}
+        <District centerZ={-200} depth={60} seed={77} range={BUILD_RANGES.paris} count={24} heights={[8.5, 10]} warmPalette={["#E8DCC8", "#DCD2BE", "#D4C8B0"]} litRatio={0.35} flavor="paris" exclude={(x, z) => (Math.abs(x + 11) < 8 && Math.abs(z + 213) < 7) || Math.hypot(x - 13, z + 194) < 11} />
+        <Building position={[-11, 0, -213]} size={[10, 6, 8]} seed={5.5} range={BUILD_RANGES.paris} delay={0.2} warm="#EFE6D4" litRatio={0.65} />
+        <Sign text="ESSEC" position={[-11, 7.3, -208.9]} width={5} visibleAfter={0.38} />
 
         {/* Sheet 04 — the flagship */}
         <AdoptTower />

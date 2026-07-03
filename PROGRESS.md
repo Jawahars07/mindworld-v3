@@ -54,7 +54,9 @@ NO drei <Html> at depth (v2 lesson). Buildings: custom ShaderMaterial, build-swe
       vars). Cranes = reusable <Crane> in AdoptTower.tsx. favicon fixed (app/icon.svg).
       ⚠ polish: roof sign renders as faint strip at t=0.52 — canvas likely drawn before webfont
       loaded; await document.fonts.ready before drawing text textures.
-- [ ] It3: Crossing — cloud layer + dotted flight arc BLR→PAR (camera lifts at t=0.26–0.38)
+- [x] It3: Crossing done — revision clouds (drafting symbol, on-language), dashed arc + paper
+      plane rides it, BLR/CDG labels. Flagship extras gated >0.46. fonts.ready redraw fix.
+      Camera: cruise key needed look-at y≈45 (quadratic arc apex ~46, NOT control-point 78).
 - [ ] It4: District character — BLR (water tanks, low-rise, auto) vs Paris (mansard profile,
       uniform heights) vs Workshops (small sheds w/ signs) — silhouettes must differ
 - [ ] It5: Open plot — crane + ghost blueprint building + contact framing; favicon (404 now)

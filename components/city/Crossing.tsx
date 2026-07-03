@@ -88,6 +88,7 @@ function endpointLabel(text: string) {
 }
 
 export function Crossing() {
+  const root = useRef<THREE.Group>(null);
   const arc = useMemo(
     () =>
       new THREE.QuadraticBezierCurve3(
@@ -110,6 +111,8 @@ export function Crossing() {
 
   useFrame(() => {
     const p = useWorld.getState().progress;
+    // the sky chapter exists only around its sheet — never over BLR/Paris streets
+    if (root.current) root.current.visible = p > 0.22 && p < 0.44;
     const t = Math.min(Math.max((p - RANGE[0]) / (RANGE[1] - RANGE[0]), 0.001), 0.999);
     if (plane.current) {
       const pos = arc.getPoint(t);
@@ -126,7 +129,7 @@ export function Crossing() {
   });
 
   return (
-    <group>
+    <group ref={root}>
       {/* dashed flight path */}
       <primitive
         object={useMemo(() => {

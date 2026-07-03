@@ -26,6 +26,9 @@ export const SHEETS: Sheet[] = [
     body: "Bengaluru. B.Tech in Computer Science, REVA University, 2021–2025. Where I learned that code only counts when it runs — first ML models, first deployed apps, first users.",
     meta: "BENGALURU QUARTER · 2021—2025 · PLOT 12°58′N 77°35′E",
     range: [0.1, 0.26],
+    links: [
+      { label: "CO₂ ML PROJECT", href: "https://github.com/Jawahars07/vehicle-co2-emission-prediction" },
+    ],
   },
   {
     no: "02",

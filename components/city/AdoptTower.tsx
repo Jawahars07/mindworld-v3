@@ -221,7 +221,7 @@ function FlagshipExtras({ children }: { children: React.ReactNode }) {
   // from afar the tower must read as blueprint like everything else
   const ref = useRef<THREE.Group>(null);
   useFrame(() => {
-    if (ref.current) ref.current.visible = useWorld.getState().progress > 0.46;
+    if (ref.current) ref.current.visible = useWorld.getState().progress > 0.5;
   });
   return <group ref={ref}>{children}</group>;
 }
