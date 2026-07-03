@@ -8,9 +8,9 @@ const KEYS: Key[] = [
   { t: 0.0, pos: [36, 55, 40], look: [0, 8, -140] }, // Sheet 00 aerial
   { t: 0.1, pos: [14, 10, -18], look: [0, 6, -70] }, // descend to avenue
   { t: 0.18, pos: [-10, 7, -50], look: [6, 9, -84] }, // inside Bengaluru quarter
-  { t: 0.26, pos: [0, 12, -92], look: [0, 26, -150] }, // leaving BLR, nose up
-  { t: 0.32, pos: [0, 62, -132], look: [0, 48, -215] }, // above the clouds
-  { t: 0.38, pos: [0, 28, -168], look: [0, 8, -208] }, // descend into Paris
+  { t: 0.26, pos: [16, 18, -80], look: [0, 34, -112] }, // leaving BLR, catching the arc
+  { t: 0.32, pos: [30, 50, -104], look: [-6, 45, -144] }, // cruise: arc + plane from the side
+  { t: 0.38, pos: [12, 32, -172], look: [-6, 12, -204] }, // descent toward CDG
   { t: 0.46, pos: [13, 8, -194], look: [-5, 10, -218] }, // Paris quarter
   { t: 0.52, pos: [0, 9, -212], look: [0, 24, -270] }, // full tower from the avenue
   { t: 0.6, pos: [26, 20, -228], look: [0, 22, -270] }, // three-quarter hero, whole silhouette

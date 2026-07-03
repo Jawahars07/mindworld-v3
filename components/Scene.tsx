@@ -9,6 +9,7 @@ import { cameraAt, BUILD_RANGES } from "@/lib/path";
 import { Ground } from "./city/Ground";
 import { District } from "./city/District";
 import { AdoptTower } from "./city/AdoptTower";
+import { Crossing } from "./city/Crossing";
 
 function ScrollDriver() {
   const setProgress = useWorld((s) => s.setProgress);
@@ -88,6 +89,9 @@ export default function Scene() {
 
         {/* Sheet 01 — Bengaluru quarter */}
         <District centerZ={-60} depth={70} seed={41} range={BUILD_RANGES.bengaluru} count={30} heights={[4, 13]} warmPalette={["#E3C9A0", "#D9B98C", "#CFAE84", "#E8DCC8"]} litRatio={0.5} />
+
+        {/* Sheet 02 — the crossing */}
+        <Crossing />
 
         {/* Sheet 03 — Paris quarter */}
         <District centerZ={-200} depth={60} seed={77} range={BUILD_RANGES.paris} count={26} heights={[7, 12]} warmPalette={["#E8DCC8", "#DCD2BE", "#D4C8B0"]} litRatio={0.35} />

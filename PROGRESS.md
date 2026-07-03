@@ -49,8 +49,11 @@ NO drei <Html> at depth (v2 lesson). Buildings: custom ShaderMaterial, build-swe
 - [x] Concept approved; roster chosen (Adopt flagship · WebForge · Tara · Rta Living · CO₂ in BLR · drafting office)
 - [x] Iteration 1: scaffold + scroll rig + build-sweep shader + generic districts + HUD title blocks
       + progress rail + SEO text mirror + shots verified (shots/p*.png). Mechanic reads GREAT.
-- [ ] It2: Adopt landmark — custom tower (setbacks, spire, facade UI panel as canvas texture),
-      REFRAME camera keys t=0.52–0.68 (currently way too close, tower fills frame), plaza
+- [x] It2: Adopt landmark done + camera reframed (t=0.52 full tower · 0.60 hero 3/4 · 0.68 facade
+      panel legible). Facade UI + roof sign are canvas textures (cssFamily() resolves next/font
+      vars). Cranes = reusable <Crane> in AdoptTower.tsx. favicon fixed (app/icon.svg).
+      ⚠ polish: roof sign renders as faint strip at t=0.52 — canvas likely drawn before webfont
+      loaded; await document.fonts.ready before drawing text textures.
 - [ ] It3: Crossing — cloud layer + dotted flight arc BLR→PAR (camera lifts at t=0.26–0.38)
 - [ ] It4: District character — BLR (water tanks, low-rise, auto) vs Paris (mansard profile,
       uniform heights) vs Workshops (small sheds w/ signs) — silhouettes must differ

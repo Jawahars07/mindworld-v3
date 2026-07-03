@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { Building } from "./Building";
 import { BUILD_RANGES } from "@/lib/path";
+import { useWorld } from "@/lib/store";
 import { cssFamily, makeCanvasTexture } from "@/lib/canvasTexture";
 
 // The flagship. Three setback tiers, a beacon spire, and a facade panel that
@@ -215,6 +216,16 @@ function Beacon() {
   );
 }
 
+function FlagshipExtras({ children }: { children: React.ReactNode }) {
+  // signage/beacon/plaza only exist once the flagship's chapter is near —
+  // from afar the tower must read as blueprint like everything else
+  const ref = useRef<THREE.Group>(null);
+  useFrame(() => {
+    if (ref.current) ref.current.visible = useWorld.getState().progress > 0.46;
+  });
+  return <group ref={ref}>{children}</group>;
+}
+
 export function AdoptTower() {
   const R = BUILD_RANGES.adopt;
   return (
@@ -227,22 +238,24 @@ export function AdoptTower() {
       <group position={[0, 30, 0]}>
         <Building position={[0, 0, -270]} size={[9, 12, 9]} seed={7.3} range={R} warm="#F2E8D5" litRatio={0.9} alwaysBuilt />
       </group>
-      {/* spire + beacon */}
-      <mesh position={[0, 45, -270]}>
-        <boxGeometry args={[0.5, 6.5, 0.5]} />
-        <meshBasicMaterial color="#c9bda6" />
-      </mesh>
-      <Beacon />
-      <FacadePanel />
-      <RoofSign />
-      {/* plaza apron: a lit ring the avenue feeds into */}
-      <mesh rotation-x={-Math.PI / 2} position={[0, 0.02, -270]}>
-        <ringGeometry args={[11.5, 12.1, 64]} />
-        <meshBasicMaterial color={CYAN} transparent opacity={0.35} toneMapped={false} />
-      </mesh>
-      {/* the cranes that built it, pulling back */}
-      <Crane position={[14, 0, -258]} rotationY={-0.7} />
-      <Crane position={[-15, 0, -280]} rotationY={2.2} height={18} jib={11} />
+      <FlagshipExtras>
+        {/* spire + beacon */}
+        <mesh position={[0, 45, -270]}>
+          <boxGeometry args={[0.5, 6.5, 0.5]} />
+          <meshBasicMaterial color="#c9bda6" />
+        </mesh>
+        <Beacon />
+        <FacadePanel />
+        <RoofSign />
+        {/* plaza apron: a lit ring the avenue feeds into */}
+        <mesh rotation-x={-Math.PI / 2} position={[0, 0.02, -270]}>
+          <ringGeometry args={[11.5, 12.1, 64]} />
+          <meshBasicMaterial color={CYAN} transparent opacity={0.35} toneMapped={false} />
+        </mesh>
+        {/* the cranes that built it, pulling back */}
+        <Crane position={[14, 0, -258]} rotationY={-0.7} />
+        <Crane position={[-15, 0, -280]} rotationY={2.2} height={18} jib={11} />
+      </FlagshipExtras>
     </group>
   );
 }

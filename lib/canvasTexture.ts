@@ -22,5 +22,12 @@ export function makeCanvasTexture(
   const tex = new THREE.CanvasTexture(canvas);
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.anisotropy = 4;
+  // webfonts may not be loaded on first draw — redraw once they are
+  if (typeof document !== "undefined" && document.fonts?.ready) {
+    document.fonts.ready.then(() => {
+      draw(ctx, w, h);
+      tex.needsUpdate = true;
+    });
+  }
   return tex;
 }
