@@ -94,3 +94,11 @@ pacing — smoothstep-per-segment was the "odd scroll" cause) · flagship fast u
 single tier colour (was popping/banded) · facade panel 1.38x on portrait (fits 390px fully) ·
 copy neutralised to "12–24 MONTH APPRENTICESHIP · FRANCE" (hero chip, Sheet 06, dimension sign).
 REMINDER that bit us: npm start serves the LAST BUILD — rebuild before re-shooting.
+
+## Content update — PandaECE + adoption positioning (2026-07-04, shipped)
+Council brief resolved: keep Blueprint City (Awwwards scan: mechanic-embodies-story already
+matches winners; Control Room rebuild rejected). Added PandaECE landmark (tallest BLR bldg,
+[13,0,-70], camera bubble at [-10,-50]) + real story in Sheet 01 (GenAI for 30+ SMEs, -40%
+prod time, human review). Positioning widened: "I build AI tools — and get teams to actually
+use them." Meta/JSON-LD/keywords now AI transformation & adoption. Rule locked: real shipped
+work only, never coursework cases (Domino RH/Zipcar/AwareLiving out).
