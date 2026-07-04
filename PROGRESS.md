@@ -87,3 +87,10 @@ Future ideas (unprompted, not committed): rickshaw/2CV easter eggs, Lighthouse p
 - It1 (2026-07-03): all core systems in. Dev: port 3033. Shots: node scripts/shoot.mjs.
   Watch: shader uses discard sweep + additive edge lines; window cells hash-lit; fog manual
   exp2 in both shaders (no scene.fog). Damped camera needs ~2s settle before screenshots.
+
+## Refine 2 — phone feedback (2026-07-04, shipped)
+Plan-view opening (dead-overhead key t=0, reveal-on-scroll) · Hermite camera spline (even
+pacing — smoothstep-per-segment was the "odd scroll" cause) · flagship fast uniform sweep +
+single tier colour (was popping/banded) · facade panel 1.38x on portrait (fits 390px fully) ·
+copy neutralised to "12–24 MONTH APPRENTICESHIP · FRANCE" (hero chip, Sheet 06, dimension sign).
+REMINDER that bit us: npm start serves the LAST BUILD — rebuild before re-shooting.
