@@ -106,7 +106,7 @@ export default function Scene() {
       <Canvas
         camera={{ fov: 52, near: 0.5, far: 900 }}
         gl={{ antialias: true, powerPreference: "high-performance" }}
-        dpr={[1, 1.75]}
+        dpr={[1, 2]}
         onCreated={({ gl, scene }) => {
           gl.setClearColor(new THREE.Color("#0A1128"));
           scene.background = new THREE.Color("#0A1128");
@@ -169,9 +169,9 @@ export default function Scene() {
         <OpenPlot />
 
         <EffectComposer>
-          <Bloom intensity={0.9} luminanceThreshold={0.32} luminanceSmoothing={0.25} mipmapBlur />
-          <Noise opacity={0.045} />
-          <Vignette eskil={false} offset={0.18} darkness={0.72} />
+          <Bloom intensity={0.7} luminanceThreshold={0.42} luminanceSmoothing={0.2} mipmapBlur />
+          <Noise opacity={0.025} />
+          <Vignette eskil={false} offset={0.16} darkness={0.55} />
         </EffectComposer>
       </Canvas>
     </div>

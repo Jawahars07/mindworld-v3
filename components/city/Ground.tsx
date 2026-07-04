@@ -34,8 +34,8 @@ const frag = /* glsl */ `
     vec3 col = uNight * 0.85;
     float minor = gridLine(vWorld.xz, 4.0, 0.05);
     float major = gridLine(vWorld.xz, 20.0, 0.09);
-    col += uCyan * minor * 0.05;
-    col += uCyan * major * 0.11;
+    col += uCyan * minor * 0.075;
+    col += uCyan * major * 0.16;
 
     // avenue spine along z, gently drifting west after the flagship
     float axis = vWorld.z > -280.0 ? 0.0 : (vWorld.z + 280.0) * 0.18;
@@ -44,7 +44,7 @@ const frag = /* glsl */ `
     float curb = (1.0 - smoothstep(0.0, 0.35, abs(abs(vWorld.x - axis) - 5.5))) ;
     col += uCyan * curb * 0.22;
 
-    float fog = 1.0 - exp(-pow(vViewDist * 0.0075, 2.0));
+    float fog = 1.0 - exp(-pow(vViewDist * 0.0053, 2.0));
     col = mix(col, uNight * 1.25, fog);
     gl_FragColor = vec4(col, 1.0);
   }

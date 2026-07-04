@@ -30,9 +30,31 @@ export default function Hud() {
           <br />
           This city is my work. Scroll to compile it.
         </p>
+        <p className="font-plot text-blueprint/90 text-[10px] md:text-xs tracking-[0.3em] mt-6 border border-blueprint/40 px-4 py-2 [text-shadow:0_1px_10px_rgba(10,17,40,0.9)]">
+          SEEKING: 24-MONTH GENAI / DIGITAL-WORKPLACE APPRENTICESHIP · FRANCE
+        </p>
         <p className="absolute bottom-8 left-1/2 -translate-x-1/2 font-plot text-blueprint text-xs tracking-[0.35em] animate-pulse motion-reduce:animate-none">
           ▼ SCROLL
         </p>
+      </div>
+
+      {/* persistent link rail — always one click from proof */}
+      <div className="fixed z-30 top-4 right-4 md:top-6 md:right-6 flex gap-2">
+        {[
+          { label: "GITHUB", href: "https://github.com/Jawahars07" },
+          { label: "CV ↓", href: "/Jawahar_Naidu_CV.pdf" },
+          { label: "EMAIL", href: "mailto:jawaharnaidu07@gmail.com" },
+        ].map((l) => (
+          <a
+            key={l.label}
+            href={l.href}
+            target={l.href.startsWith("http") ? "_blank" : undefined}
+            rel="noreferrer"
+            className="font-plot text-[10px] tracking-[0.2em] border border-blueprint/50 bg-night/60 backdrop-blur-sm text-blueprint px-3 py-1.5 hover:bg-blueprint hover:text-night transition-colors"
+          >
+            {l.label}
+          </a>
+        ))}
       </div>
 
       {/* Title block — all other sheets */}

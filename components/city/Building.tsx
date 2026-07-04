@@ -55,7 +55,7 @@ const frag = /* glsl */ `
     float diff = max(dot(n, normalize(vec3(0.4, 0.8, 0.45))), 0.0);
     float rim = max(dot(n, normalize(vec3(-0.5, 0.2, -0.6))), 0.0);
     float vgrad = 0.55 + 0.45 * (vLocal.y / max(uSize.y, 0.001));
-    vec3 col = uWarm * (0.16 + 0.3 * diff + 0.12 * rim) * vgrad;
+    vec3 col = uWarm * (0.24 + 0.34 * diff + 0.14 * rim) * vgrad;
 
     // procedural windows on vertical faces
     float vertFace = step(abs(n.y), 0.5);
@@ -79,7 +79,7 @@ const frag = /* glsl */ `
     col = mix(col, col + uCyan * 0.12, 1.0 - uBuild);
 
     // manual exp2 fog into the night
-    float fog = 1.0 - exp(-pow(vViewDist * 0.0075, 2.0));
+    float fog = 1.0 - exp(-pow(vViewDist * 0.0053, 2.0));
     col = mix(col, uNight * 1.25, fog);
 
     gl_FragColor = vec4(col, 1.0);
