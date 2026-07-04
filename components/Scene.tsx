@@ -122,8 +122,10 @@ export default function Scene() {
         <directionalLight position={[40, 80, 20]} intensity={1.1} color="#CFE0F0" />
 
         {/* Sheet 01 — Bengaluru quarter: chaotic low-rise, water tanks, headrooms */}
-        <District centerZ={-60} depth={70} seed={41} range={BUILD_RANGES.bengaluru} count={30} heights={[4, 11]} warmPalette={["#E3C9A0", "#D9B98C", "#CFAE84", "#E8DCC8"]} litRatio={0.5} flavor="blr" exclude={(x, z) => Math.abs(x + 16) < 7 && Math.abs(z + 46) < 8} />
-        {/* landmarks: campus + the CO2 ML lab (B.Tech project) */}
+        <District centerZ={-60} depth={70} seed={41} range={BUILD_RANGES.bengaluru} count={30} heights={[4, 11]} warmPalette={["#E3C9A0", "#D9B98C", "#CFAE84", "#E8DCC8"]} litRatio={0.5} flavor="blr" exclude={(x, z) => (Math.abs(x + 16) < 7 && Math.abs(z + 46) < 8) || Math.hypot(x - 13, z + 70) < 9 || Math.hypot(x + 10, z + 50) < 9} />
+        {/* landmarks: campus + the CO2 ML lab (B.Tech project) + PandaECE (first real job) */}
+        <Building position={[13, 0, -70]} size={[10, 13, 8]} seed={6.6} range={BUILD_RANGES.bengaluru} delay={0.1} warm="#E8D5B0" litRatio={0.75} windowScale={1.05} />
+        <Sign text="PANDAECE" position={[13, 14, -65.8]} width={6.5} visibleAfter={0.1} />
         <Building position={[-16, 0, -46]} size={[9, 5.5, 7]} seed={3.3} range={BUILD_RANGES.bengaluru} delay={0.15} warm="#E8DCC8" litRatio={0.7} />
         <Sign text="REVA UNIVERSITY" position={[-16, 6.8, -42.4]} width={7.5} visibleAfter={0.1} />
         <Building position={[13, 0, -38]} size={[5, 3.6, 5]} seed={9.9} range={BUILD_RANGES.bengaluru} delay={0.3} warm="#D9C6A8" litRatio={0.8} />

@@ -21,12 +21,16 @@ const plot = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "Jawahar Naidu — Blueprint City",
   description:
-    "A 3D city that compiles as you scroll. Jawahar Naidu builds AI tools people actually use — Bengaluru to Paris, ESSEC MIM, seeking a 12–24 month apprenticeship in France.",
+    "A 3D city that compiles as you scroll. Jawahar Naidu builds AI tools and drives their adoption — Bengaluru to Paris, ESSEC MIM, seeking a 12–24 month AI transformation / digital apprenticeship in France.",
   metadataBase: new URL("https://jawaharnaidu.com"),
   alternates: { canonical: "https://jawaharnaidu.com" },
   keywords: [
     "Jawahar Naidu",
     "AI builder",
+    "AI transformation",
+    "AI adoption",
+    "digital transformation apprenticeship",
+    "alternance transformation digitale",
     "portfolio",
     "ESSEC MIM",
     "apprenticeship France",
@@ -70,7 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             name: "Jawahar Naidu",
             url: "https://jawaharnaidu.com",
             email: "mailto:jawaharnaidu07@gmail.com",
-            jobTitle: "AI builder · Master in Management student at ESSEC Business School",
+            jobTitle: "AI transformation & adoption builder · Master in Management student at ESSEC Business School",
             alumniOf: [
               { "@type": "CollegeOrUniversity", name: "REVA University" },
               { "@type": "CollegeOrUniversity", name: "ESSEC Business School" },

@@ -16,14 +16,14 @@ export const SHEETS: Sheet[] = [
     no: "00",
     title: "SKYLINE",
     sub: "Jawahar Naidu",
-    body: "I build AI tools people actually use. This city is my work — every district a real, working thing. Scroll to compile it.",
+    body: "I build AI tools — and get teams to actually use them. This city is my work: every district a real, working thing. Scroll to compile it.",
     meta: "NIGHT ELEVATION · 2021—2026 · SCALE 1:CAREER",
     range: [0.0, 0.1],
   },
   {
     no: "01",
     title: "FOUNDATIONS",
-    body: "Bengaluru. B.Tech in Computer Science, REVA University, 2021–2025. Where I learned that code only counts when it runs — first ML models, first deployed apps, first users.",
+    body: "Bengaluru. B.Tech in Computer Science, REVA University, 2021–2025 — first ML models, first deployed apps, first users. And a first real job: Digital Strategist at PandaECE, putting GenAI into content production for 30+ SME clients. Production time down 40%, with human review before anything went out.",
     meta: "BENGALURU QUARTER · 2021—2025 · PLOT 12°58′N 77°35′E",
     range: [0.1, 0.26],
     links: [
@@ -47,7 +47,7 @@ export const SHEETS: Sheet[] = [
   {
     no: "04",
     title: "THE FLAGSHIP — ADOPT",
-    body: "The one tower already built. Adopt turns any work task into a qualified GenAI / Copilot use case — fit score, ready-to-paste prompt, adoption guide. Built to mirror a real Digital Workplace & GenAI Adoption apprentice job description: the tool that role needs, already working. Next.js 16 · React 19 · Claude.",
+    body: "The one tower already built. Adopt turns any work task into a qualified GenAI / Copilot use case — fit score, ready-to-paste prompt, adoption guide. The tool qualifies the task; a person makes the call. Built to mirror a real Digital Workplace & GenAI Adoption apprentice job description: the tool that role needs, already working. Next.js 16 · React 19 · Claude.",
     meta: "CITY CENTRE · SHIPPED 2026 · STATUS: LIVE",
     range: [0.52, 0.72],
     links: [

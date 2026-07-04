@@ -26,7 +26,7 @@ export default function Hud() {
           JAWAHAR NAIDU
         </h1>
         <p className="text-inkline mt-5 max-w-md text-base md:text-lg leading-relaxed [text-shadow:0_1px_14px_rgba(10,17,40,0.95)]">
-          I build AI tools people actually use.
+          I build AI tools — and get teams to actually use them.
           <br />
           This city is my work. Scroll to compile it.
         </p>
