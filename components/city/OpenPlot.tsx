@@ -31,7 +31,10 @@ function GhostBuilding() {
     return new THREE.EdgesGeometry(g);
   }, []);
   useFrame(({ clock }) => {
-    if (mat.current) mat.current.opacity = 0.35 + Math.sin(clock.elapsedTime * 1.1) * 0.2;
+    if (!mat.current) return;
+    mat.current.opacity = useWorld.getState().reduced
+      ? 0.5
+      : 0.35 + Math.sin(clock.elapsedTime * 1.1) * 0.2;
   });
   return (
     <lineSegments geometry={geo} position={[0, 0, -374]}>

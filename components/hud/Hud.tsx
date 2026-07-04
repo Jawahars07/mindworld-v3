@@ -30,7 +30,9 @@ export default function Hud() {
           <br />
           This city is my work. Scroll to compile it.
         </p>
-        <p className="font-plot text-blueprint text-xs tracking-[0.35em] mt-12 animate-pulse">▼ SCROLL</p>
+        <p className="absolute bottom-8 left-1/2 -translate-x-1/2 font-plot text-blueprint text-xs tracking-[0.35em] animate-pulse motion-reduce:animate-none">
+          ▼ SCROLL
+        </p>
       </div>
 
       {/* Title block — all other sheets */}

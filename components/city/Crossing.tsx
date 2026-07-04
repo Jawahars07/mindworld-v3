@@ -56,8 +56,10 @@ function RevisionCloud({
   const geo = useMemo(() => revisionCloudGeometry(rx, rz, 14, seed), [rx, rz, seed]);
   const group = useRef<THREE.Group>(null);
   useFrame(({ clock }) => {
-    if (group.current)
-      group.current.position.x = position[0] + Math.sin(clock.elapsedTime * 0.1 * drift + seed) * 3;
+    if (!group.current) return;
+    group.current.position.x = useWorld.getState().reduced
+      ? position[0]
+      : position[0] + Math.sin(clock.elapsedTime * 0.1 * drift + seed) * 3;
   });
   return (
     <group ref={group} position={position}>

@@ -27,6 +27,11 @@ function TaraOrb({ position }: { position: [number, number, number] }) {
   const ref = useRef<THREE.Mesh>(null);
   useFrame(({ clock }) => {
     if (!ref.current) return;
+    if (useWorld.getState().reduced) {
+      ref.current.position.y = position[1];
+      (ref.current.material as THREE.MeshBasicMaterial).opacity = 0.85;
+      return;
+    }
     const t = clock.elapsedTime;
     ref.current.position.y = position[1] + Math.sin(t * 1.3) * 0.3;
     (ref.current.material as THREE.MeshBasicMaterial).opacity = 0.75 + Math.sin(t * 2.1) * 0.2;
@@ -43,8 +48,12 @@ function TaraOrb({ position }: { position: [number, number, number] }) {
 function SmartWindows({ position }: { position: [number, number, number] }) {
   const mats = useRef<THREE.MeshBasicMaterial[]>([]);
   useFrame(({ clock }) => {
+    const reduced = useWorld.getState().reduced;
     mats.current.forEach((m, i) => {
-      if (m) m.opacity = 0.35 + 0.6 * Math.max(0, Math.sin(clock.elapsedTime * 0.9 + i * 1.9));
+      if (m)
+        m.opacity = reduced
+          ? 0.7
+          : 0.35 + 0.6 * Math.max(0, Math.sin(clock.elapsedTime * 0.9 + i * 1.9));
     });
   });
   return (

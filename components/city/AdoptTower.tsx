@@ -109,8 +109,13 @@ function FacadePanel() {
   const tex = useMemo(() => makeCanvasTexture(768, 960, drawFacadeUI), []);
   const mat = useRef<THREE.MeshBasicMaterial>(null);
   useFrame(({ clock }) => {
+    if (!mat.current) return;
     // faint screen breathing so it reads as a live display, not a poster
-    if (mat.current) mat.current.color.setScalar(0.92 + Math.sin(clock.elapsedTime * 1.7) * 0.06);
+    if (useWorld.getState().reduced) {
+      mat.current.color.setScalar(0.95);
+      return;
+    }
+    mat.current.color.setScalar(0.92 + Math.sin(clock.elapsedTime * 1.7) * 0.06);
   });
   return (
     <mesh position={[0, 21.5, -263.9]}>
@@ -204,7 +209,10 @@ export function Crane({
 function Beacon() {
   const ref = useRef<THREE.MeshBasicMaterial>(null);
   useFrame(({ clock }) => {
-    if (ref.current) ref.current.opacity = 0.55 + Math.abs(Math.sin(clock.elapsedTime * 1.4)) * 0.45;
+    if (!ref.current) return;
+    ref.current.opacity = useWorld.getState().reduced
+      ? 0.85
+      : 0.55 + Math.abs(Math.sin(clock.elapsedTime * 1.4)) * 0.45;
   });
   return (
     <group position={[0, 48.5, -270]}>

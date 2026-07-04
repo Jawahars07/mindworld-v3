@@ -2,7 +2,8 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, Bloom, Noise, Vignette } from "@react-three/postprocessing";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import StaticFallback from "./StaticFallback";
 import * as THREE from "three";
 import { useWorld } from "@/lib/store";
 import { cameraAt, BUILD_RANGES } from "@/lib/path";
@@ -17,6 +18,7 @@ import { OpenPlot } from "./city/OpenPlot";
 
 function ScrollDriver() {
   const setProgress = useWorld((s) => s.setProgress);
+  const setReduced = useWorld((s) => s.setReduced);
   useEffect(() => {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -24,13 +26,26 @@ function ScrollDriver() {
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [setProgress]);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const onMq = () => setReduced(mq.matches);
+    onMq();
+    mq.addEventListener("change", onMq);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      mq.removeEventListener("change", onMq);
+    };
+  }, [setProgress, setReduced]);
   return null;
 }
 
 function CameraRig() {
-  const { camera } = useThree();
+  const { camera, size } = useThree();
+  useEffect(() => {
+    // portrait phones need a wider cone or the avenue crops to a slit
+    const cam = camera as THREE.PerspectiveCamera;
+    cam.fov = size.width / size.height < 0.75 ? 68 : 52;
+    cam.updateProjectionMatrix();
+  }, [camera, size]);
   const pos = useRef(new THREE.Vector3());
   const look = useRef(new THREE.Vector3());
   const smoothed = useRef(-1);
@@ -75,6 +90,17 @@ function Stars() {
 }
 
 export default function Scene() {
+  const [glOk, setGlOk] = useState<boolean | null>(null);
+  useEffect(() => {
+    try {
+      const c = document.createElement("canvas");
+      setGlOk(!!(c.getContext("webgl2") || c.getContext("webgl")));
+    } catch {
+      setGlOk(false);
+    }
+  }, []);
+  if (glOk === null) return <div className="fixed inset-0 bg-night" />;
+  if (!glOk) return <StaticFallback />;
   return (
     <div className="fixed inset-0">
       <Canvas

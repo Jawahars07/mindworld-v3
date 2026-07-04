@@ -62,7 +62,10 @@ NO drei <Html> at depth (v2 lesson). Buildings: custom ShaderMaterial, build-swe
       canvas nameplate w/ visibleAfter gate. Lights added for meshStandardMaterial props.
       RULE learned: any camera key off the avenue (|x|>7) needs a District exclude bubble
       (Math.hypot vs key pos < 11) or a block spawns on the lens.
-- [ ] It5: Open plot — crane + ghost blueprint building + contact framing; favicon (404 now)
+- [x] It5: Workshops (WebForge antenna · Tara orb · Rta breathing windows · drafting office w/
+      mini wireframe city) + Open Plot (ghost bldg, crane, 24 MONTHS dimension line, plot dashes).
+      FIX: Sign now shrink-to-fit — fixed 512px canvas was clipping long labels (looked like 3D
+      occlusion, was texture overflow). Lane cam lifted to y=13 (fillers blocked lens at y=6).
 - [ ] It6: Mobile 390px pass · reduced-motion + no-WebGL fallback · Lighthouse
 - [ ] It7: Full-path QA sweep, perf, polish (Sheet00 hero/wireframe overlap, scroll hint collides
       with subtitle) → then STOP, report ready for review. NO deploy before approval.
