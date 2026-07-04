@@ -21,7 +21,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://jawaharnaidu.com"),
   openGraph: {
     title: "Jawahar Naidu — Blueprint City",
+    description: "A 3D city that compiles as you scroll. AI tools, shipped and working. Seeking a 12–24 month apprenticeship in France.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Blueprint City — Jawahar Naidu's portfolio" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jawahar Naidu — Blueprint City",
     description: "A 3D city that compiles as you scroll. AI tools, shipped and working.",
+    images: ["/og.png"],
   },
 };
 
