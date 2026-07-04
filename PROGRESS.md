@@ -72,10 +72,16 @@ NO drei <Html> at depth (v2 lesson). Buildings: custom ShaderMaterial, build-swe
       roof sign fixed (was occluded by own roofline from low cameras — moved to spire y=46.8,
       now shared Sign component) · hero text shadows. CITY COMPLETE — awaiting Jawahar's review.
 
-## STATUS: READY FOR REVIEW (2026-07-04). Loop stopped.
-After approval: push repo to GitHub (new repo mindworld-v3 or replace?ASK), deploy to Vercel
-prod, point jawaharnaidu.com at it (currently serves old portfolio repo). Prod server was left
-running on http://localhost:3033 for review.
+## STATUS: LIVE ON jawaharnaidu.com (2026-07-04). Loop complete.
+Approved with refinements ("looks fantastic"): clarity pass (fog 0.0053, brighter facades/grid,
+tighter bloom, dpr 2), persistent GITHUB/CV/EMAIL rail, CV pdf in public/ (from career-ops
+output/cv-master.pdf — re-copy when CV updates!), hero chip + Sheet 06 say "24-month" explicitly.
+Shipped: repo github.com/Jawahars07/mindworld-v3 (main) · Vercel project mindworld-v3 ·
+jawaharnaidu.com moved from old "portfolio" project via API (DELETE v9/projects/portfolio/
+domains + POST v10/projects/mindworld-v3/domains; `vercel domains rm` would have nuked the
+account-level domain — never use it for moves). www → apex 308. Verified live: title +
+flagship sheet screenshot against https://jawaharnaidu.com.
+Future ideas (unprompted, not committed): rickshaw/2CV easter eggs, Lighthouse pass, OG image.
 
 ## Iteration log
 - It1 (2026-07-03): all core systems in. Dev: port 3033. Shots: node scripts/shoot.mjs.
