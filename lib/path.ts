@@ -5,7 +5,9 @@ import * as THREE from "three";
 type Key = { t: number; pos: [number, number, number]; look: [number, number, number] };
 
 const KEYS: Key[] = [
-  { t: 0.0, pos: [36, 55, 40], look: [0, 8, -140] }, // Sheet 00 aerial
+  // Sheet 00: dead-overhead plan view — reads as a flat blueprint sheet;
+  // the third dimension is the first surprise of the scroll
+  { t: 0.0, pos: [0, 125, -58.8], look: [0, 0, -61.2] },
   { t: 0.1, pos: [14, 10, -18], look: [0, 6, -70] }, // descend to avenue
   { t: 0.18, pos: [-10, 7, -50], look: [6, 9, -84] }, // inside Bengaluru quarter
   { t: 0.26, pos: [16, 18, -80], look: [0, 34, -112] }, // leaving BLR, catching the arc
@@ -21,22 +23,50 @@ const KEYS: Key[] = [
   { t: 1.0, pos: [0, 17, -354], look: [0, 9, -382] }, // the open plot
 ];
 
-const _a = new THREE.Vector3();
-const _b = new THREE.Vector3();
+// Cubic Hermite through the keys with finite-difference tangents (respecting
+// non-uniform t spacing). Per-segment smoothstep braked to zero velocity at
+// every key — that read as surging/uneven scroll. This glides continuously.
+const TS = KEYS.map((k) => k.t);
+const P = KEYS.map((k) => new THREE.Vector3(...k.pos));
+const L = KEYS.map((k) => new THREE.Vector3(...k.look));
+const TENSION = 0.72; // <1 damps overshoot on sharp turns
 
-function smooth(x: number) {
-  return x * x * (3 - 2 * x);
+function tangentsOf(pts: THREE.Vector3[]) {
+  return pts.map((_, i) => {
+    const v = new THREE.Vector3();
+    if (i === 0) v.subVectors(pts[1], pts[0]).divideScalar(TS[1] - TS[0]);
+    else if (i === pts.length - 1)
+      v.subVectors(pts[i], pts[i - 1]).divideScalar(TS[i] - TS[i - 1]);
+    else {
+      const fwd = new THREE.Vector3().subVectors(pts[i + 1], pts[i]).divideScalar(TS[i + 1] - TS[i]);
+      const back = new THREE.Vector3().subVectors(pts[i], pts[i - 1]).divideScalar(TS[i] - TS[i - 1]);
+      v.addVectors(fwd, back).multiplyScalar(0.5);
+    }
+    return v.multiplyScalar(TENSION);
+  });
+}
+const PM = tangentsOf(P);
+const LM = tangentsOf(L);
+
+function hermite(pts: THREE.Vector3[], ms: THREE.Vector3[], i: number, s: number, dt: number, out: THREE.Vector3) {
+  const s2 = s * s;
+  const s3 = s2 * s;
+  out
+    .copy(pts[i])
+    .multiplyScalar(2 * s3 - 3 * s2 + 1)
+    .addScaledVector(ms[i], (s3 - 2 * s2 + s) * dt)
+    .addScaledVector(pts[i + 1], -2 * s3 + 3 * s2)
+    .addScaledVector(ms[i + 1], (s3 - s2) * dt);
 }
 
 export function cameraAt(progress: number, outPos: THREE.Vector3, outLook: THREE.Vector3) {
   const t = Math.min(Math.max(progress, 0), 1);
   let i = 0;
-  while (i < KEYS.length - 2 && t > KEYS[i + 1].t) i++;
-  const k0 = KEYS[i];
-  const k1 = KEYS[i + 1];
-  const f = smooth((t - k0.t) / (k1.t - k0.t));
-  outPos.copy(_a.fromArray(k0.pos)).lerp(_b.fromArray(k1.pos), f);
-  outLook.copy(_a.fromArray(k0.look)).lerp(_b.fromArray(k1.look), f);
+  while (i < TS.length - 2 && t > TS[i + 1]) i++;
+  const dt = TS[i + 1] - TS[i];
+  const s = (t - TS[i]) / dt;
+  hermite(P, PM, i, s, dt, outPos);
+  hermite(L, LM, i, s, dt, outLook);
 }
 
 // District build windows: progress range over which each district erects itself.

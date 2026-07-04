@@ -31,7 +31,7 @@ export default function Hud() {
           This city is my work. Scroll to compile it.
         </p>
         <p className="font-plot text-blueprint/90 text-[10px] md:text-xs tracking-[0.3em] mt-6 border border-blueprint/40 px-4 py-2 [text-shadow:0_1px_10px_rgba(10,17,40,0.9)]">
-          SEEKING: 24-MONTH GENAI / DIGITAL-WORKPLACE APPRENTICESHIP · FRANCE
+          SEEKING: 12–24 MONTH APPRENTICESHIP · FRANCE
         </p>
         <p className="absolute bottom-8 left-1/2 -translate-x-1/2 font-plot text-blueprint text-xs tracking-[0.35em] animate-pulse motion-reduce:animate-none">
           ▼ SCROLL

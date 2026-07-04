@@ -138,10 +138,9 @@ export function Building({
 
   useFrame(() => {
     const p = useWorld.getState().progress;
+    // flagship: one fast uniform sweep instead of a binary pop (no colour jump)
     const b = alwaysBuilt
-      ? buildOf(p, range, 0) > 0
-        ? 1
-        : 0
+      ? Math.min(Math.max((p - range[0]) / 0.03, 0), 1)
       : buildOf(p, range, delay);
     if (matRef.current) matRef.current.uniforms.uBuild.value = b;
     if (lineMatRef.current) {

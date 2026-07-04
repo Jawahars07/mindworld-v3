@@ -97,7 +97,7 @@ export function OpenPlot() {
       <DimensionLine />
       <Crane position={[11, 0, -371]} rotationY={2.4} height={19} jib={13} />
       <Sign text="YOUR TEAM'S NEXT TOOL" position={[0, 12, -377.5]} width={8} color="#5FD4F5" visibleAfter={GATE} />
-      <Sign text="24 MONTHS" position={[0, 0.9, -365.6]} width={4} color="#5FD4F5" visibleAfter={GATE} />
+      <Sign text="12–24 MONTHS" position={[0, 0.9, -365.6]} width={5} color="#5FD4F5" visibleAfter={GATE} />
     </Gated>
   );
 }

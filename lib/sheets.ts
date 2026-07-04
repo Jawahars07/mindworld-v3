@@ -70,7 +70,7 @@ export const SHEETS: Sheet[] = [
   {
     no: "06",
     title: "THE OPEN PLOT",
-    body: "One empty lot, one crane, one fresh blueprint: your team's next tool. Seeking a 24-month GenAI / digital-workplace apprenticeship in France — ESSEC rhythm, shipping from week one.",
+    body: "One empty lot, one crane, one fresh blueprint: your team's next tool. Seeking a 12–24 month apprenticeship in France — ESSEC rhythm, shipping from week one.",
     meta: "CITY EDGE · 2026— · PERMIT: PENDING YOUR CALL",
     range: [0.88, 1.001],
     links: [

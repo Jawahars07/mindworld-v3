@@ -2,7 +2,7 @@
 
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Building } from "./Building";
 import { Sign } from "./Sign";
 import { BUILD_RANGES } from "@/lib/path";
@@ -109,6 +109,9 @@ function drawFacadeUI(ctx: CanvasRenderingContext2D, w: number, h: number) {
 function FacadePanel() {
   const tex = useMemo(() => makeCanvasTexture(768, 960, drawFacadeUI), []);
   const mat = useRef<THREE.MeshBasicMaterial>(null);
+  // portrait phones: the screen must stay readable, so it outgrows the facade
+  const { size } = useThree();
+  const panelScale = size.width / size.height < 0.75 ? 1.38 : 1;
   useFrame(({ clock }) => {
     if (!mat.current) return;
     // faint screen breathing so it reads as a live display, not a poster
@@ -119,7 +122,7 @@ function FacadePanel() {
     mat.current.color.setScalar(0.92 + Math.sin(clock.elapsedTime * 1.7) * 0.06);
   });
   return (
-    <mesh position={[0, 21.5, -263.9]}>
+    <mesh position={[0, 21.5, -263.9]} scale={panelScale}>
       <planeGeometry args={[8.4, 10.5]} />
       <meshBasicMaterial ref={mat} map={tex} toneMapped={false} />
     </mesh>
@@ -221,10 +224,10 @@ export function AdoptTower() {
       {/* three setback tiers — all stand complete the moment the district range opens */}
       <Building position={[0, 0, -270]} size={[17, 15, 15]} seed={7.1} range={R} warm="#F0E6D2" litRatio={0.8} windowScale={1.1} alwaysBuilt />
       <group position={[0, 15, 0]}>
-        <Building position={[0, 0, -270]} size={[13, 15, 12]} seed={7.2} range={R} warm="#EFE2CB" litRatio={0.85} windowScale={1.05} alwaysBuilt />
+        <Building position={[0, 0, -270]} size={[13, 15, 12]} seed={7.2} range={R} warm="#F0E6D2" litRatio={0.85} windowScale={1.05} alwaysBuilt />
       </group>
       <group position={[0, 30, 0]}>
-        <Building position={[0, 0, -270]} size={[9, 12, 9]} seed={7.3} range={R} warm="#F2E8D5" litRatio={0.9} alwaysBuilt />
+        <Building position={[0, 0, -270]} size={[9, 12, 9]} seed={7.3} range={R} warm="#F0E6D2" litRatio={0.9} alwaysBuilt />
       </group>
       <FlagshipExtras>
         {/* spire + beacon */}
