@@ -68,9 +68,14 @@ NO drei <Html> at depth (v2 lesson). Buildings: custom ShaderMaterial, build-swe
       occlusion, was texture overflow). Lane cam lifted to y=13 (fillers blocked lens at y=6).
 - [x] It6: Mobile 390px verified (hero + flagship strong) · StaticFallback (no-WebGL flat drawing
       set) · reduced-motion freezes all idle pulses · portrait FOV 68 · hero scroll cue at bottom
-- [ ] It7 (FINAL): npm run build (prod build must pass!) · full-path QA sweep desktop+mobile all
-      7 sheets · verify RoofSign after fonts fix · perf sanity · hero text legibility scrim?
-      → then STOP loop, report ready for review. NO deploy before approval.
+- [x] It7 (FINAL): prod build green · full-path sweep (9 desktop + 4 mobile keyframes) · ADOPT
+      roof sign fixed (was occluded by own roofline from low cameras — moved to spire y=46.8,
+      now shared Sign component) · hero text shadows. CITY COMPLETE — awaiting Jawahar's review.
+
+## STATUS: READY FOR REVIEW (2026-07-04). Loop stopped.
+After approval: push repo to GitHub (new repo mindworld-v3 or replace?ASK), deploy to Vercel
+prod, point jawaharnaidu.com at it (currently serves old portfolio repo). Prod server was left
+running on http://localhost:3033 for review.
 
 ## Iteration log
 - It1 (2026-07-03): all core systems in. Dev: port 3033. Shots: node scripts/shoot.mjs.
