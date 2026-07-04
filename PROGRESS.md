@@ -57,8 +57,11 @@ NO drei <Html> at depth (v2 lesson). Buildings: custom ShaderMaterial, build-swe
 - [x] It3: Crossing done — revision clouds (drafting symbol, on-language), dashed arc + paper
       plane rides it, BLR/CDG labels. Flagship extras gated >0.46. fonts.ready redraw fix.
       Camera: cruise key needed look-at y≈45 (quadratic arc apex ~46, NOT control-point 78).
-- [ ] It4: District character — BLR (water tanks, low-rise, auto) vs Paris (mansard profile,
-      uniform heights) vs Workshops (small sheds w/ signs) — silhouettes must differ
+- [x] It4: District character done — BLR (tanks/headrooms/parapets, REVA + CO₂ ML LAB signs) vs
+      Paris (uniform 8.5–10h, zinc mansard frustums, chimneys, ESSEC sign). Sign.tsx = reusable
+      canvas nameplate w/ visibleAfter gate. Lights added for meshStandardMaterial props.
+      RULE learned: any camera key off the avenue (|x|>7) needs a District exclude bubble
+      (Math.hypot vs key pos < 11) or a block spawns on the lens.
 - [ ] It5: Open plot — crane + ghost blueprint building + contact framing; favicon (404 now)
 - [ ] It6: Mobile 390px pass · reduced-motion + no-WebGL fallback · Lighthouse
 - [ ] It7: Full-path QA sweep, perf, polish (Sheet00 hero/wireframe overlap, scroll hint collides

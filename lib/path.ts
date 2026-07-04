@@ -16,7 +16,7 @@ const KEYS: Key[] = [
   { t: 0.6, pos: [26, 20, -228], look: [0, 22, -270] }, // three-quarter hero, whole silhouette
   { t: 0.68, pos: [3, 21, -245], look: [0, 21, -270] }, // facade panel medium shot
   { t: 0.74, pos: [-9, 8, -280], look: [-16, 6, -316] }, // turn into workshop lane
-  { t: 0.82, pos: [-15, 7, -312], look: [-9, 5, -340] },
+  { t: 0.82, pos: [-22, 13, -306], look: [-8, 2, -330] },
   { t: 0.88, pos: [-4, 9, -338], look: [0, 6, -370] },
   { t: 1.0, pos: [0, 17, -354], look: [0, 9, -382] }, // the open plot
 ];

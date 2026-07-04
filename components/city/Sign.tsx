@@ -26,13 +26,18 @@ export function Sign({
 }) {
   const tex = useMemo(
     () =>
-      makeCanvasTexture(512, 96, (ctx, w, h) => {
+      makeCanvasTexture(1024, 192, (ctx, w, h) => {
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
         ctx.clearRect(0, 0, w, h);
         ctx.fillStyle = color;
-        ctx.font = `600 54px ${cssFamily("--font-plot", '"IBM Plex Mono"')}, monospace`;
+        ctx.font = `600 104px ${cssFamily("--font-plot", '"IBM Plex Mono"')}, monospace`;
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(text, w / 2, h / 2 + 2);
+        // shrink-to-fit so long labels never clip at the canvas edge
+        const m = ctx.measureText(text).width;
+        const s = Math.min(1, (w - 64) / m);
+        ctx.setTransform(s, 0, 0, s, w / 2, h / 2);
+        ctx.fillText(text, 0, 4);
       }),
     [text, color]
   );
@@ -42,7 +47,7 @@ export function Sign({
   });
   return (
     <mesh ref={ref} position={position} rotation-y={rotationY}>
-      <planeGeometry args={[width, width * (96 / 512)]} />
+      <planeGeometry args={[width, width * (192 / 1024)]} />
       <meshBasicMaterial map={tex} transparent toneMapped={false} side={THREE.DoubleSide} />
     </mesh>
   );

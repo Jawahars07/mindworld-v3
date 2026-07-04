@@ -12,6 +12,8 @@ import { AdoptTower } from "./city/AdoptTower";
 import { Crossing } from "./city/Crossing";
 import { Sign } from "./city/Sign";
 import { Building } from "./city/Building";
+import { Workshops } from "./city/Workshops";
+import { OpenPlot } from "./city/OpenPlot";
 
 function ScrollDriver() {
   const setProgress = useWorld((s) => s.setProgress);
@@ -113,8 +115,32 @@ export default function Scene() {
         <AdoptTower />
         <District centerZ={-260} depth={48} seed={91} range={BUILD_RANGES.adopt} count={14} heights={[6, 16]} exclude={(x, z) => Math.abs(x) < 14 && Math.abs(z + 270) < 15} />
 
-        {/* Sheet 05 — Workshops lane */}
-        <District centerZ={-318} depth={44} seed={55} range={BUILD_RANGES.workshops} count={16} heights={[3, 7]} avenueX={-8} litRatio={0.55} />
+        {/* Sheet 05 — Workshops lane: named sheds + filler, camera-path clearance */}
+        <Workshops />
+        <District
+          centerZ={-318}
+          depth={44}
+          seed={55}
+          range={BUILD_RANGES.workshops}
+          count={12}
+          heights={[3, 6]}
+          avenueX={-8}
+          litRatio={0.55}
+          exclude={(x, z) =>
+            [
+              [-20, -302],
+              [-2, -312],
+              [-22, -326],
+              [-5, -330],
+              [-9, -280],
+              [-26, -314],
+              [-4, -338],
+            ].some(([px, pz]) => Math.hypot(x - px, z - pz) < 8)
+          }
+        />
+
+        {/* Sheet 06 — the open plot */}
+        <OpenPlot />
 
         <EffectComposer>
           <Bloom intensity={0.9} luminanceThreshold={0.32} luminanceSmoothing={0.25} mipmapBlur />
