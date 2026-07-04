@@ -66,9 +66,11 @@ NO drei <Html> at depth (v2 lesson). Buildings: custom ShaderMaterial, build-swe
       mini wireframe city) + Open Plot (ghost bldg, crane, 24 MONTHS dimension line, plot dashes).
       FIX: Sign now shrink-to-fit — fixed 512px canvas was clipping long labels (looked like 3D
       occlusion, was texture overflow). Lane cam lifted to y=13 (fillers blocked lens at y=6).
-- [ ] It6: Mobile 390px pass · reduced-motion + no-WebGL fallback · Lighthouse
-- [ ] It7: Full-path QA sweep, perf, polish (Sheet00 hero/wireframe overlap, scroll hint collides
-      with subtitle) → then STOP, report ready for review. NO deploy before approval.
+- [x] It6: Mobile 390px verified (hero + flagship strong) · StaticFallback (no-WebGL flat drawing
+      set) · reduced-motion freezes all idle pulses · portrait FOV 68 · hero scroll cue at bottom
+- [ ] It7 (FINAL): npm run build (prod build must pass!) · full-path QA sweep desktop+mobile all
+      7 sheets · verify RoofSign after fonts fix · perf sanity · hero text legibility scrim?
+      → then STOP loop, report ready for review. NO deploy before approval.
 
 ## Iteration log
 - It1 (2026-07-03): all core systems in. Dev: port 3033. Shots: node scripts/shoot.mjs.

@@ -22,10 +22,10 @@ export default function Hud() {
         }`}
       >
         <p className="font-plot text-blueprint/80 text-xs tracking-[0.5em] mb-5">SHEET 00 · NIGHT ELEVATION</p>
-        <h1 className="text-limestone text-5xl md:text-7xl font-bold tracking-tight leading-none">
+        <h1 className="text-limestone text-5xl md:text-7xl font-bold tracking-tight leading-none [text-shadow:0_2px_24px_rgba(10,17,40,0.9),0_0_60px_rgba(10,17,40,0.7)]">
           JAWAHAR NAIDU
         </h1>
-        <p className="text-inkline mt-5 max-w-md text-base md:text-lg leading-relaxed">
+        <p className="text-inkline mt-5 max-w-md text-base md:text-lg leading-relaxed [text-shadow:0_1px_14px_rgba(10,17,40,0.95)]">
           I build AI tools people actually use.
           <br />
           This city is my work. Scroll to compile it.

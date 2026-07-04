@@ -4,6 +4,7 @@ import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 import { Building } from "./Building";
+import { Sign } from "./Sign";
 import { BUILD_RANGES } from "@/lib/path";
 import { useWorld } from "@/lib/store";
 import { cssFamily, makeCanvasTexture } from "@/lib/canvasTexture";
@@ -125,27 +126,6 @@ function FacadePanel() {
   );
 }
 
-function RoofSign() {
-  const tex = useMemo(
-    () =>
-      makeCanvasTexture(512, 128, (ctx, w, h) => {
-        ctx.clearRect(0, 0, w, h);
-        ctx.fillStyle = AMBER;
-        ctx.font = `700 96px ${cssFamily("--font-display", "Archivo")}, sans-serif`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText("ADOPT", w / 2, h / 2 + 4);
-      }),
-    []
-  );
-  return (
-    <mesh position={[0, 43.2, -269]}>
-      <planeGeometry args={[7, 1.75]} />
-      <meshBasicMaterial map={tex} transparent toneMapped={false} />
-    </mesh>
-  );
-}
-
 export function Crane({
   position,
   rotationY = 0,
@@ -254,7 +234,7 @@ export function AdoptTower() {
         </mesh>
         <Beacon />
         <FacadePanel />
-        <RoofSign />
+        <Sign text="ADOPT" position={[0, 46.8, -269]} width={8} color="#FFB454" visibleAfter={0.5} />
         {/* plaza apron: a lit ring the avenue feeds into */}
         <mesh rotation-x={-Math.PI / 2} position={[0, 0.02, -270]}>
           <ringGeometry args={[11.5, 12.1, 64]} />
