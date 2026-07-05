@@ -10,7 +10,7 @@ export default function StaticFallback() {
       <div className="max-w-2xl mx-auto px-5 py-14 space-y-6">
         <p className="font-plot text-blueprint/80 text-xs tracking-[0.4em]">BLUEPRINT CITY · FLAT DRAWING SET</p>
         <h1 className="text-limestone text-4xl font-bold tracking-tight">JAWAHAR NAIDU</h1>
-        <p className="text-inkline">I build AI tools people actually use.</p>
+        <p className="text-inkline">I get AI adopted inside real businesses — strategy first, then the build.</p>
         {SHEETS.map((s) => (
           <section key={s.no} className="titleblock p-5">
             <div className="flex items-baseline justify-between font-plot text-[10px] tracking-[0.28em] text-blueprint/90">

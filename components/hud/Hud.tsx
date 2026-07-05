@@ -27,7 +27,7 @@ export default function Hud() {
           JAWAHAR NAIDU
         </h1>
         <p className="text-inkline mt-5 max-w-md text-base md:text-lg leading-relaxed [text-shadow:0_1px_14px_rgba(10,17,40,0.95)]">
-          I build AI tools — and get teams to actually use them.
+          I get AI adopted inside real businesses — strategy first, then the build.
           <br />
           This city is my work. Scroll to compile it.
         </p>
@@ -42,9 +42,9 @@ export default function Hud() {
       {/* persistent link rail — always one click from proof */}
       <div className="fixed z-30 top-4 right-4 md:top-6 md:right-6 flex gap-2">
         {[
-          { label: "GITHUB", href: "https://github.com/Jawahars07" },
           { label: "CV ↓", href: "/Jawahar_Naidu_CV.pdf" },
           { label: "EMAIL", href: "mailto:jawaharnaidu07@gmail.com" },
+          { label: "GITHUB", href: "https://github.com/Jawahars07" },
         ].map((l) => (
           <a
             key={l.label}

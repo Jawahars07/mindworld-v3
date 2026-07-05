@@ -16,7 +16,7 @@ export const SHEETS: Sheet[] = [
     no: "00",
     title: "SKYLINE",
     sub: "Jawahar Naidu",
-    body: "I build AI tools — and get teams to actually use them. This city is my work: every district a real, working thing. Scroll to compile it.",
+    body: "I get AI adopted inside real businesses — strategy first, then the build. This city is the proof: every district a real, working thing. Scroll to compile it.",
     meta: "NIGHT ELEVATION · 2021—2026 · SCALE 1:CAREER",
     range: [0.0, 0.1],
   },
@@ -52,7 +52,7 @@ export const SHEETS: Sheet[] = [
     range: [0.52, 0.72],
     links: [
       { label: "OPEN THE LIVE APP", href: "https://adopt-eight.vercel.app" },
-      { label: "READ THE CODE", href: "https://github.com/Jawahars07/adopt" },
+      { label: "HOW IT WORKS", href: "https://github.com/Jawahars07/adopt" },
     ],
   },
   {

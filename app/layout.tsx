@@ -22,12 +22,12 @@ const plot = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "Jawahar Naidu — Blueprint City",
   description:
-    "A 3D city that compiles as you scroll. Jawahar Naidu builds AI tools and drives their adoption — Bengaluru to Paris, ESSEC MIM, seeking a 12–24 month AI transformation / digital apprenticeship in France.",
+    "A 3D city that compiles as you scroll. Jawahar Naidu turns AI into adopted business outcomes — Bengaluru to Paris, ESSEC MIM, seeking a 12–24 month AI transformation / digital apprenticeship in France.",
   metadataBase: new URL("https://jawaharnaidu.com"),
   alternates: { canonical: "https://jawaharnaidu.com" },
   keywords: [
     "Jawahar Naidu",
-    "AI builder",
+    "AI adoption strategist",
     "AI transformation",
     "AI adoption",
     "digital transformation apprenticeship",
@@ -44,13 +44,13 @@ export const metadata: Metadata = {
   verification: { google: "Zm1PrT69rL-AL0AVEGMW4w55jzhVbyOdFXtN5t5dkes" },
   openGraph: {
     title: "Jawahar Naidu — Blueprint City",
-    description: "A 3D city that compiles as you scroll. AI tools, shipped and working. Seeking a 12–24 month apprenticeship in France.",
+    description: "A 3D city that compiles as you scroll. AI adopted into real business outcomes — strategy first. Seeking a 12–24 month apprenticeship in France.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "Blueprint City — Jawahar Naidu's portfolio" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jawahar Naidu — Blueprint City",
-    description: "A 3D city that compiles as you scroll. AI tools, shipped and working.",
+    description: "A 3D city that compiles as you scroll. AI adopted into real business outcomes — strategy first.",
     images: ["/og.png"],
   },
 };
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             name: "Jawahar Naidu",
             url: "https://jawaharnaidu.com",
             email: "mailto:jawaharnaidu07@gmail.com",
-            jobTitle: "AI transformation & adoption builder · Master in Management student at ESSEC Business School",
+            jobTitle: "Business strategist for AI adoption · Master in Management student at ESSEC Business School",
             alumniOf: [
               { "@type": "CollegeOrUniversity", name: "REVA University" },
               { "@type": "CollegeOrUniversity", name: "ESSEC Business School" },
