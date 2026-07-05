@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useWorld } from "@/lib/store";
 import { SHEETS, sheetAt } from "@/lib/sheets";
+import { trackClick } from "@/lib/analytics";
 
 // All narration lives in the DOM (v2 lesson: no drei <Html> at depth).
 // Identity: architectural drawing title blocks, bottom-left; progress rail, right edge.
@@ -50,6 +51,7 @@ export default function Hud() {
             href={l.href}
             target={l.href.startsWith("http") ? "_blank" : undefined}
             rel="noreferrer"
+            onClick={() => trackClick(l.label, l.href)}
             className="font-plot text-[10px] tracking-[0.2em] border border-blueprint/50 bg-night/60 backdrop-blur-sm text-blueprint px-3 py-1.5 hover:bg-blueprint hover:text-night transition-colors"
           >
             {l.label}
@@ -78,6 +80,7 @@ export default function Hud() {
                   href={l.href}
                   target={l.href.startsWith("mailto") ? undefined : "_blank"}
                   rel="noreferrer"
+                  onClick={() => trackClick(l.label, l.href)}
                   className="font-plot text-[10px] tracking-[0.2em] border border-blueprint/50 text-blueprint px-3 py-1.5 hover:bg-blueprint hover:text-night transition-colors"
                 >
                   {l.label}

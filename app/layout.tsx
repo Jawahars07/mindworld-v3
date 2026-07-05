@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -40,6 +41,7 @@ export const metadata: Metadata = {
     "Adopt",
   ],
   robots: { index: true, follow: true },
+  verification: { google: "Zm1PrT69rL-AL0AVEGMW4w55jzhVbyOdFXtN5t5dkes" },
   openGraph: {
     title: "Jawahar Naidu — Blueprint City",
     description: "A 3D city that compiles as you scroll. AI tools, shipped and working. Seeking a 12–24 month apprenticeship in France.",
@@ -59,14 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-display antialiased">
         {children}
         <Analytics />
-        {GA_ID && (
-          <>
-            <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
-            <Script id="ga4" strategy="afterInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${GA_ID}');`}
-            </Script>
-          </>
-        )}
+        {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
         <Script id="jsonld-person" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify({
             "@context": "https://schema.org",
