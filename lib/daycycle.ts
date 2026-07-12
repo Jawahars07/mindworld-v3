@@ -29,9 +29,9 @@ export const DAY_STOPS: DayStop[] = [
   { t: 0.11, sunAzimuth: 0.55, sunElevation: 0.06, sun: "#FF8E4D", sunIntensity: 1.35, sky: "#3D3560", horizon: "#FF7E4D", ground: "#2A1E28", fog: "#77507A", fogDensity: 0.0047, night: 0.55, stars: 0.12 },
   { t: 0.16, sunAzimuth: 0.62, sunElevation: 0.22, sun: "#FFB876", sunIntensity: 1.6, sky: "#5E7FB0", horizon: "#FFB08A", ground: "#4A3B34", fog: "#B08A8C", fogDensity: 0.0042, night: 0.28, stars: 0.0 },
   { t: 0.24, sunAzimuth: 0.75, sunElevation: 0.42, sun: "#FFDCAC", sunIntensity: 1.8, sky: "#7FB0DC", horizon: "#D8E2E8", ground: "#5E5448", fog: "#C2CCD4", fogDensity: 0.0038, night: 0.1, stars: 0.0 },
-  { t: 0.31, sunAzimuth: 0.9, sunElevation: 0.62, sun: "#FFF0D4", sunIntensity: 2.0, sky: "#79B4E4", horizon: "#E4ECF0", ground: "#6A6052", fog: "#CBD6DD", fogDensity: 0.0036, night: 0.04, stars: 0.0 },
+  { t: 0.31, sunAzimuth: 0.9, sunElevation: 0.62, sun: "#FFF0D4", sunIntensity: 1.9, sky: "#6FAEE0", horizon: "#C9D8E2", ground: "#6A6052", fog: "#BCCBD6", fogDensity: 0.0034, night: 0.04, stars: 0.0 },
   // Act 2 — noon above the clouds, thin bright air
-  { t: 0.4,  sunAzimuth: 1.35, sunElevation: 0.98, sun: "#FFF8EA", sunIntensity: 2.3, sky: "#5FA8E8", horizon: "#EAF2F8", ground: "#8E9AA6", fog: "#D9E6F0", fogDensity: 0.0028, night: 0.0, stars: 0.0 },
+  { t: 0.4,  sunAzimuth: 1.35, sunElevation: 0.98, sun: "#FFF8EA", sunIntensity: 2.1, sky: "#4E9CE0", horizon: "#C6DCEE", ground: "#8E9AA6", fog: "#BFD4E6", fogDensity: 0.0026, night: 0.0, stars: 0.0 },
   // Act 3 — descent into Paris, afternoon sliding to golden hour
   { t: 0.5,  sunAzimuth: 2.0, sunElevation: 0.55, sun: "#FFE9C2", sunIntensity: 2.0, sky: "#7FB0D8", horizon: "#F0E4D0", ground: "#6E6252", fog: "#D3D6D2", fogDensity: 0.0038, night: 0.03, stars: 0.0 },
   { t: 0.62, sunAzimuth: 2.35, sunElevation: 0.34, sun: "#FFCE8E", sunIntensity: 1.9, sky: "#8FA8C8", horizon: "#F2D6AC", ground: "#66584A", fog: "#D6C6AC", fogDensity: 0.0041, night: 0.07, stars: 0.0 },

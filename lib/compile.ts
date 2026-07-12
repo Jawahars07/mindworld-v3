@@ -7,7 +7,8 @@
 // (from uniform or instance attribute) and may offset position first.
 export const compileVaryings = /* glsl */ `
   varying vec3 vLocal;      // object-space position, base at y=0
-  varying vec3 vNormal2;    // view-independent world-ish normal (normalMatrix applied)
+  varying vec3 vNormal2;    // WORLD-space normal — for sun/hemisphere lighting
+  varying vec3 vObjN;       // OBJECT-space normal — for face classification
   varying float vViewDist;  // for exp2 fog
   varying float vBuild;     // 0 wireframe … 1 fully compiled
   varying vec3 vSize;       // building dimensions (w,h,d)
@@ -29,6 +30,7 @@ export const compileFragPars = /* glsl */ `
   uniform float uLitRatio;  // base lit-window ratio at full night
   varying vec3 vLocal;
   varying vec3 vNormal2;
+  varying vec3 vObjN;
   varying float vViewDist;
   varying float vBuild;
   varying vec3 vSize;
@@ -46,9 +48,10 @@ export const compileFragPars = /* glsl */ `
 
   // Full compile-material shading: albedo in, final unfogged color out.
   vec3 mwShade(vec3 albedo) {
-    vec3 n = normalize(vNormal2);
+    vec3 nW = normalize(vNormal2); // lighting
+    vec3 n = normalize(vObjN);     // face classification
     float vgrad = 0.62 + 0.38 * (vLocal.y / max(vSize.y, 0.001));
-    vec3 col = mwLight(albedo, n) * vgrad;
+    vec3 col = mwLight(albedo, nW) * vgrad;
 
     // procedural windows on vertical faces
     float vertFace = step(abs(n.y), 0.5);
@@ -61,7 +64,9 @@ export const compileFragPars = /* glsl */ `
     float win = inWin * vertFace * margin;
     // by day: dark sky-tinted glass; by night: amber, ratio scales with uNight
     float litRatio = uLitRatio * (0.12 + 0.88 * uNight);
-    float lit = step(1.0 - litRatio, mwHash(cell + floor(n.xz * 3.0)));
+    // +0.5 = round(): raw floor() flickers per-fragment on axis-aligned faces
+    // (normal interpolation noise around 0) and speckles the windows
+    float lit = step(1.0 - litRatio, mwHash(cell + floor(n.xz * 3.0 + 0.5)));
     vec3 dayGlass = mix(uSkyCol * 0.55, uSkyCol, mwHash(cell + 2.7) * 0.5);
     vec3 nightGlass = uAmber * (1.1 + 0.7 * mwHash(cell + 4.2)) * lit;
     vec3 glass = mix(dayGlass * (1.0 - lit * 0.4), dayGlass * 0.35 + nightGlass, uNight * 0.85 + lit * 0.15);

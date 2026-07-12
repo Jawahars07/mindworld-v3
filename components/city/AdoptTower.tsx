@@ -212,7 +212,7 @@ function FlagshipExtras({ children }: { children: React.ReactNode }) {
   // from afar the tower must read as blueprint like everything else
   const ref = useRef<THREE.Group>(null);
   useFrame(() => {
-    if (ref.current) ref.current.visible = useWorld.getState().progress > 0.5;
+    if (ref.current) ref.current.visible = useWorld.getState().progress > 0.56;
   });
   return <group ref={ref}>{children}</group>;
 }
@@ -237,7 +237,7 @@ export function AdoptTower() {
         </mesh>
         <Beacon />
         <FacadePanel />
-        <Sign text="ADOPT" position={[0, 46.8, -269]} width={8} color="#FFB454" visibleAfter={0.5} />
+        <Sign text="ADOPT" position={[0, 46.8, -269]} width={8} color="#FFB454" visibleAfter={0.56} />
         {/* plaza apron: a lit ring the avenue feeds into */}
         <mesh rotation-x={-Math.PI / 2} position={[0, 0.02, -270]}>
           <ringGeometry args={[11.5, 12.1, 64]} />

@@ -5,7 +5,8 @@ import { chromium } from "playwright";
 const url = process.argv[2] || "http://localhost:3033";
 const width = parseInt(process.argv[3] || "1440", 10);
 const height = parseInt(process.argv[4] || "900", 10);
-const points = (process.argv[5] || "0,0.15,0.3,0.45,0.6,0.78,0.95")
+// defaults cover every act boundary + sheet midpoints of the v4 film
+const points = (process.argv[5] || "0,0.06,0.11,0.16,0.21,0.27,0.33,0.4,0.46,0.53,0.6,0.66,0.76,0.84,0.9,0.97")
   .split(",")
   .map(Number);
 

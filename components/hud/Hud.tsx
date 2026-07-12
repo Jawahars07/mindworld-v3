@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useWorld } from "@/lib/store";
 import { SHEETS, sheetAt } from "@/lib/sheets";
+import { actAt } from "@/lib/path";
 import { trackClick } from "@/lib/analytics";
 
 // All narration lives in the DOM (v2 lesson: no drei <Html> at depth).
@@ -12,6 +13,7 @@ export default function Hud() {
   const [progress, setProgress] = useState(0);
   useEffect(() => useWorld.subscribe((s) => setProgress(s.progress)), []);
   const sheet = sheetAt(progress);
+  const act = actAt(progress);
   const isTitle = sheet.no === "00";
 
   return (
@@ -22,14 +24,14 @@ export default function Hud() {
           isTitle ? "opacity-100" : "opacity-0"
         }`}
       >
-        <p className="font-plot text-blueprint/80 text-xs tracking-[0.5em] mb-5">SHEET 00 · NIGHT ELEVATION</p>
+        <p className="font-plot text-blueprint/80 text-xs tracking-[0.5em] mb-5">ACT 0 · BLUEPRINT NIGHT</p>
         <h1 className="text-limestone text-5xl md:text-7xl font-bold tracking-tight leading-none [text-shadow:0_2px_24px_rgba(10,17,40,0.9),0_0_60px_rgba(10,17,40,0.7)]">
           JAWAHAR NAIDU
         </h1>
         <p className="text-inkline mt-5 max-w-md text-base md:text-lg leading-relaxed [text-shadow:0_1px_14px_rgba(10,17,40,0.95)]">
-          I get AI adopted inside real businesses — strategy first, then the build.
+          Every district below is something real — built, shipped, or lived.
           <br />
-          This city is my work. Scroll to compile it.
+          Right now it&apos;s a blueprint. Scroll — the sun is coming up on it.
         </p>
         <p className="font-plot text-blueprint/90 text-[10px] md:text-xs tracking-[0.3em] mt-6 border border-blueprint/40 px-4 py-2 [text-shadow:0_1px_10px_rgba(10,17,40,0.9)]">
           SEEKING: 12–24 MONTH APPRENTICESHIP · FRANCE
@@ -67,8 +69,8 @@ export default function Hud() {
       >
         <div className="titleblock p-4 md:p-5">
           <div className="flex items-baseline justify-between font-plot text-[10px] tracking-[0.28em] text-blueprint/90">
-            <span>SHEET {sheet.no} / 06</span>
-            <span>BLUEPRINT CITY</span>
+            <span>SHEET {sheet.no}</span>
+            <span>ACT {act.no} · {act.name}</span>
           </div>
           <h2 className="text-limestone text-xl md:text-2xl font-semibold tracking-tight mt-2">{sheet.title}</h2>
           <p className="text-inkline text-[13px] md:text-sm leading-relaxed mt-2">{sheet.body}</p>

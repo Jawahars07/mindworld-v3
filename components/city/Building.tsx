@@ -22,7 +22,8 @@ const vert = /* glsl */ `
   ${compileVaryings}
   void main() {
     vLocal = position;
-    vNormal2 = normalize(normalMatrix * normal);
+    vNormal2 = normalize(mat3(modelMatrix) * normal);
+    vObjN = normal;
     vBuild = uBuild;
     vSize = uSize;
     vec4 mv = modelViewMatrix * vec4(position, 1.0);

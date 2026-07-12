@@ -13,12 +13,12 @@ const KEYS: Key[] = [
   // Act 1 — sunrise sweeps Bengaluru
   { t: 0.1, pos: [14, 10, -18], look: [0, 6, -70] }, // avenue entry, first light
   { t: 0.15, pos: [-6, 7, -32], look: [-18, 5, -46] }, // ACADEMIC: REVA campus
-  { t: 0.2, pos: [15, 9, -60], look: [9, 9, -76] }, // CAREER: PandaECE + PocketLite
+  { t: 0.2, pos: [-1, 10, -52], look: [13, 9, -71] }, // CAREER: PandaECE + PocketLite from the avenue
   { t: 0.26, pos: [-3, 8, -82], look: [-15, 7, -98] }, // CULTURAL: ISKCON quarter
   // Act 2 — takeoff and the crossing
-  { t: 0.32, pos: [9, 11, -110], look: [-2, 13, -142] }, // runway, wheels up
-  { t: 0.38, pos: [26, 44, -138], look: [-4, 44, -172] }, // climbing beside the aircraft
-  { t: 0.43, pos: [30, 58, -158], look: [-8, 50, -192] }, // cruise above the clouds
+  { t: 0.32, pos: [10, 6, -102], look: [-1, 7, -128] }, // runway, wheels up — close on the aircraft
+  { t: 0.38, pos: [22, 36, -132], look: [-4, 34, -168] }, // climbing beside the aircraft
+  { t: 0.43, pos: [24, 54, -154], look: [-10, 47, -196] }, // cruise above the clouds
   { t: 0.48, pos: [12, 30, -180], look: [-4, 12, -206] }, // descent toward Paris
   // Act 3 — Paris, afternoon into golden hour
   { t: 0.53, pos: [13, 8, -196], look: [-6, 9, -216] }, // ACADEMIC: ESSEC quarter
@@ -27,7 +27,7 @@ const KEYS: Key[] = [
   { t: 0.7, pos: [3, 21, -246], look: [0, 21, -270] }, // facade panel, medium shot
   { t: 0.76, pos: [-9, 8, -281], look: [-16, 6, -316] }, // turn into the workshop lane
   { t: 0.82, pos: [-22, 13, -307], look: [-8, 2, -331] },
-  { t: 0.875, pos: [-4, 9, -337], look: [0, 6, -368] }, // CULTURAL: the integration street
+  { t: 0.875, pos: [-6, 8, -334], look: [2, 4, -364] }, // CULTURAL: the integration street
   // Act 4 — sunset at the open plot
   { t: 0.94, pos: [0, 12, -350], look: [0, 8, -380] },
   { t: 1.0, pos: [0, 17, -356], look: [0, 10, -384] },

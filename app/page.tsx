@@ -9,11 +9,11 @@ export default function Page() {
     <main>
       <Scene />
       <Hud />
-      {/* scroll runway: 7 sheets ≈ 8 viewport-heights of travel */}
-      <div aria-hidden className="h-[800vh]" />
+      {/* scroll runway: 11 sheets / 5 acts ≈ 13 viewport-heights of travel */}
+      <div aria-hidden className="h-[1300vh]" />
       {/* real text for crawlers and screen readers */}
       <article className="sr-only">
-        <h1>Jawahar Naidu — AI builder, Bengaluru to Paris</h1>
+        <h1>Jawahar Naidu — The City Compiles: Bengaluru to Paris</h1>
         {SHEETS.map((s) => (
           <section key={s.no}>
             <h2>{s.title}</h2>
