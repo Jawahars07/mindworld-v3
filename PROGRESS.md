@@ -102,3 +102,37 @@ matches winners; Control Room rebuild rejected). Added PandaECE landmark (talles
 prod time, human review). Positioning widened: "I build AI tools — and get teams to actually
 use them." Meta/JSON-LD/keywords now AI transformation & adoption. Rule locked: real shipped
 work only, never coursework cases (Domino RH/Zipcar/AwareLiving out).
+
+---
+
+# v4 — "THE CITY COMPILES" (branch v4-city-compiles, 2026-07-12/13) — AT GATE, awaiting Jawahar
+
+Film: 5 acts / 11 sheets. Act0 night blueprint plan → Act1 sunrise Bengaluru (ACADEMIC REVA+CO₂ ·
+CAREER PandaECE+PocketLite · CULTURAL ISKCON temple hero) → Act2 takeoff/crossing (airliner GLB,
+clouds, contrail) → Act3 Paris afternoon→golden hour (ESSEC · ADOPT flagship · workshops ·
+integration street) → Act4 sunset open plot (ask: 12–24mo apprenticeship, Sept 2026).
+
+New systems: lib/daycycle.ts (keyframed sun/sky/fog, shared DAY uniforms — ONE update/frame lights
+everything) · lib/compile.ts (shared shader chunks) · InstancedDistrict (1 draw call/district,
+in-shader wireframe→fill) · Traffic (rickshaws BLR / cars Paris, day-cycle headlights) · Crowds
+(cylindrical-billboard SDF silhouettes) · SkyDome+Clouds · Flight · Heroes.tsx (4 Blender GLBs,
+draco, 52KB total: airliner/rickshaw/citroen/temple; decoders in public/draco). Tier system in
+store (low = halved counts). CONVENTIONS.md = module contracts. CONTENT-PARKING.md = positioning
+decisions + fact-safety flags (cv.md French B1 vs wiki A1 conflict flagged).
+
+LESSONS (bugs that cost time): (1) normalMatrix = VIEW space — face classification/sun lighting
+need world (mat3(modelMatrix)) + object (raw normal) instead; solid-cyan-slab + camera-relative
+lighting bug. (2) floor(n.xz*3.0) flickers per-fragment on axis faces → +0.5 (round) fixes window
+speckle. (3) Billboard height must be WORLD-up, only width view-space (cylindrical) or people
+become stalks under a pitched camera. (4) Blender scale = FULL extent (size×scale), not half.
+(5) shoot.mjs first run after big shader changes can hit 30s screenshot timeout (compile stall) —
+rerun, don't debug ghosts.
+
+Verified: build clean (Next 16.2.9, 6/6 static) · tsc clean · 16-pt desktop + 7-pt mobile sweeps
+on prod build, zero console errors after favicon.ico fix · 60fps @ 1440x900 AND 390x844 (Metal GPU,
+heaviest scenes 0.21/0.60/0.76; swiftshader numbers are meaningless — use --use-angle=metal) ·
+assets 52KB models + 752KB draco decoders, budget ≤8MB.
+
+Preview: https://mindworld-v3-git-v4-city-compiles-jawaharnaidu07-5427s-projects.vercel.app
+(SSO-protected — Jawahar opens it logged into Vercel; token couldn't mint bypass link, so E2E ran
+on the identical local prod build instead). GATE: no merge to main / no production until approval.
