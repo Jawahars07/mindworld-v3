@@ -4,23 +4,33 @@ import * as THREE from "three";
 // beats constant-speed spline traversal here.
 type Key = { t: number; pos: [number, number, number]; look: [number, number, number] };
 
+// v4 "The City Compiles" — one continuous take, Bengaluru to Paris.
+// Act map lives in ACTS below; district compile windows in BUILD_RANGES.
 const KEYS: Key[] = [
-  // Sheet 00: dead-overhead plan view — reads as a flat blueprint sheet;
-  // the third dimension is the first surprise of the scroll
+  // Act 0: dead-overhead plan view — the blueprint sheet at night
   { t: 0.0, pos: [0, 125, -58.8], look: [0, 0, -61.2] },
-  { t: 0.1, pos: [14, 10, -18], look: [0, 6, -70] }, // descend to avenue
-  { t: 0.18, pos: [-10, 7, -50], look: [6, 9, -84] }, // inside Bengaluru quarter
-  { t: 0.26, pos: [16, 18, -80], look: [0, 34, -112] }, // leaving BLR, catching the arc
-  { t: 0.32, pos: [30, 50, -104], look: [-6, 45, -144] }, // cruise: arc + plane from the side
-  { t: 0.38, pos: [12, 32, -172], look: [-6, 12, -204] }, // descent toward CDG
-  { t: 0.46, pos: [13, 8, -194], look: [-5, 10, -218] }, // Paris quarter
-  { t: 0.52, pos: [0, 9, -212], look: [0, 24, -270] }, // full tower from the avenue
-  { t: 0.6, pos: [26, 20, -228], look: [0, 22, -270] }, // three-quarter hero, whole silhouette
-  { t: 0.68, pos: [3, 21, -245], look: [0, 21, -270] }, // facade panel medium shot
-  { t: 0.74, pos: [-9, 8, -280], look: [-16, 6, -316] }, // turn into workshop lane
-  { t: 0.82, pos: [-22, 13, -306], look: [-8, 2, -330] },
-  { t: 0.88, pos: [-4, 9, -338], look: [0, 6, -370] },
-  { t: 1.0, pos: [0, 17, -354], look: [0, 9, -382] }, // the open plot
+  { t: 0.06, pos: [10, 42, -22], look: [0, 6, -62] }, // begin the descent as dawn nears
+  // Act 1 — sunrise sweeps Bengaluru
+  { t: 0.1, pos: [14, 10, -18], look: [0, 6, -70] }, // avenue entry, first light
+  { t: 0.15, pos: [-6, 7, -32], look: [-18, 5, -46] }, // ACADEMIC: REVA campus
+  { t: 0.2, pos: [15, 9, -60], look: [9, 9, -76] }, // CAREER: PandaECE + PocketLite
+  { t: 0.26, pos: [-3, 8, -82], look: [-15, 7, -98] }, // CULTURAL: ISKCON quarter
+  // Act 2 — takeoff and the crossing
+  { t: 0.32, pos: [9, 11, -110], look: [-2, 13, -142] }, // runway, wheels up
+  { t: 0.38, pos: [26, 44, -138], look: [-4, 44, -172] }, // climbing beside the aircraft
+  { t: 0.43, pos: [30, 58, -158], look: [-8, 50, -192] }, // cruise above the clouds
+  { t: 0.48, pos: [12, 30, -180], look: [-4, 12, -206] }, // descent toward Paris
+  // Act 3 — Paris, afternoon into golden hour
+  { t: 0.53, pos: [13, 8, -196], look: [-6, 9, -216] }, // ACADEMIC: ESSEC quarter
+  { t: 0.58, pos: [0, 9, -214], look: [0, 24, -270] }, // the avenue opens to the tower
+  { t: 0.64, pos: [26, 20, -230], look: [0, 22, -270] }, // Adopt, three-quarter hero
+  { t: 0.7, pos: [3, 21, -246], look: [0, 21, -270] }, // facade panel, medium shot
+  { t: 0.76, pos: [-9, 8, -281], look: [-16, 6, -316] }, // turn into the workshop lane
+  { t: 0.82, pos: [-22, 13, -307], look: [-8, 2, -331] },
+  { t: 0.875, pos: [-4, 9, -337], look: [0, 6, -368] }, // CULTURAL: the integration street
+  // Act 4 — sunset at the open plot
+  { t: 0.94, pos: [0, 12, -350], look: [0, 8, -380] },
+  { t: 1.0, pos: [0, 17, -356], look: [0, 10, -384] },
 ];
 
 // Cubic Hermite through the keys with finite-difference tangents (respecting
@@ -69,13 +79,37 @@ export function cameraAt(progress: number, outPos: THREE.Vector3, outLook: THREE
   hermite(L, LM, i, s, dt, outLook);
 }
 
-// District build windows: progress range over which each district erects itself.
+// Camera keys that leave the avenue (|x| > 7) — districts must keep an exclusion
+// bubble around each or a filler block spawns on the lens. See CONVENTIONS.md.
+export const CAMERA_BUBBLES: [number, number][] = KEYS.filter((k) => Math.abs(k.pos[0]) > 7).map(
+  (k) => [k.pos[0], k.pos[2]]
+);
+
+// The five acts. HUD act label + shoot.mjs boundaries read from here.
+export const ACTS = [
+  { no: 0, name: "BLUEPRINT NIGHT", range: [0.0, 0.08] as const },
+  { no: 1, name: "SUNRISE — BENGALURU", range: [0.08, 0.31] as const },
+  { no: 2, name: "THE CROSSING", range: [0.31, 0.48] as const },
+  { no: 3, name: "PARIS — GOLDEN HOUR", range: [0.48, 0.88] as const },
+  { no: 4, name: "SUNSET — THE OPEN PLOT", range: [0.88, 1.0] as const },
+];
+
+export function actAt(progress: number) {
+  for (const a of ACTS) if (progress >= a.range[0] && progress < a.range[1]) return a;
+  return ACTS[ACTS.length - 1];
+}
+
+// District build windows: progress range over which each district compiles.
 export const BUILD_RANGES = {
-  bengaluru: [0.06, 0.2] as const,
-  paris: [0.36, 0.48] as const,
-  adopt: [0.5, 0.56] as const, // fast — it reads as "already done" vs neighbours
+  blrAcademic: [0.09, 0.17] as const,
+  blrCareer: [0.15, 0.23] as const,
+  blrCultural: [0.21, 0.29] as const,
+  bengaluru: [0.09, 0.28] as const, // filler fabric across the whole quarter
+  paris: [0.47, 0.56] as const,
+  adopt: [0.56, 0.62] as const, // fast — it reads as "already done" vs neighbours
   workshops: [0.68, 0.82] as const,
-  openPlot: [0.86, 0.96] as const,
+  parisCultural: [0.8, 0.875] as const,
+  openPlot: [0.88, 0.96] as const,
 };
 
 export function buildOf(progress: number, range: readonly [number, number], delay = 0) {

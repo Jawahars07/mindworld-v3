@@ -1,8 +1,10 @@
-// The script: 7 blueprint "sheets". `range` is scroll progress [start, end).
+// The screenplay: 11 sheets across 5 acts. `range` is scroll progress [start, end).
 // HUD shows a sheet's title block while progress is inside its range.
+// Every fact here traces to ohara/wiki + career-ops/cv.md. Nothing invented.
 
 export type Sheet = {
   no: string;
+  act: number; // index into ACTS (lib/path.ts)
   title: string;
   sub?: string;
   body: string;
@@ -14,42 +16,71 @@ export type Sheet = {
 export const SHEETS: Sheet[] = [
   {
     no: "00",
-    title: "SKYLINE",
+    act: 0,
+    title: "THE CITY COMPILES",
     sub: "Jawahar Naidu",
-    body: "I get AI adopted inside real businesses — strategy first, then the build. This city is the proof: every district a real, working thing. Scroll to compile it.",
-    meta: "NIGHT ELEVATION · 2021—2026 · SCALE 1:CAREER",
-    range: [0.0, 0.1],
+    body: "Every district below is something real — places I studied, teams I worked with, products I shipped. Right now it's a blueprint. Scroll, and the sun comes up on it.",
+    meta: "NIGHT PLAN · 2019—2026 · SCALE 1:CAREER",
+    range: [0.0, 0.08],
   },
   {
     no: "01",
-    title: "FOUNDATIONS",
-    body: "Bengaluru. B.Tech in Computer Science, REVA University, 2021–2025 — first ML models, first deployed apps, first users. And a first real job: Digital Strategist at PandaECE, putting GenAI into content production for 30+ SME clients. Production time down 40%, with human review before anything went out.",
-    meta: "BENGALURU QUARTER · 2021—2025 · PLOT 12°58′N 77°35′E",
-    range: [0.1, 0.26],
+    act: 1,
+    title: "SUNRISE — BENGALURU",
+    body: "First light, 12°58′N. The city that built me: an engineering degree, a first job with real clients, and a community that taught me to run things at scale.",
+    meta: "BENGALURU · 2019—2025 · COMPILE FRONT MOVING",
+    range: [0.08, 0.13],
+  },
+  {
+    no: "01·A",
+    act: 1,
+    title: "ACADEMIC QUARTER",
+    body: "B.Tech in Computer Science, REVA University, 2021–2025 — honours. First ML models, first deployed apps, first users. The CO₂ prediction project from those years is still public: a model that beat three others on a real dataset, wrapped in an app anyone can run.",
+    meta: "REVA CAMPUS · 2021—2025 · PLOT 12°58′N 77°35′E",
+    range: [0.13, 0.18],
     links: [
       { label: "CO₂ ML PROJECT", href: "https://github.com/Jawahars07/vehicle-co2-emission-prediction" },
     ],
   },
   {
+    no: "01·B",
+    act: 1,
+    title: "CAREER QUARTER",
+    body: "Two working buildings. PocketLite — my first production code: PHP backends and CRM systems. Then PandaECE, where I ran digital strategy for 30+ SME clients and put GenAI into their production workflows: production time down 40%, with a human reviewing everything before it shipped.",
+    meta: "PANDAECE · POCKETLITE · 2023—2025 · IN OPERATION",
+    range: [0.18, 0.24],
+  },
+  {
+    no: "01·C",
+    act: 1,
+    title: "CULTURAL QUARTER",
+    body: "Four years volunteering at ISKCON Bengaluru. I led a team of 50+ across events hosting 5,000+ people — zero critical incidents in four years. It's where the Vedic thread in my work starts, and where I learned to stay calm when thousands of things can go wrong at once.",
+    meta: "ISKCON BENGALURU · 2019—2023 · 5,000+ ATTENDEES",
+    range: [0.24, 0.31],
+  },
+  {
     no: "02",
+    act: 2,
     title: "THE CROSSING",
-    body: "2025. One flight, 7,800 km. The build moves to Europe.",
+    body: "2025. One flight, 7,800 km. The city falls away, the day passes below. Everything I'd built fit in two suitcases and a GitHub account.",
     meta: "BLR → CDG · 2025 · CRUISE FL350",
-    range: [0.26, 0.38],
+    range: [0.31, 0.48],
   },
   {
     no: "03",
-    title: "NEW GROUND",
-    body: "Paris. ESSEC Business School, Master in Management — apprenticeship track. Adding the business layer to the builder: strategy, financial modeling, how organisations actually adopt technology.",
-    meta: "PARIS QUARTER · 2025— · PLOT 49°02′N 2°04′E",
-    range: [0.38, 0.52],
+    act: 3,
+    title: "NEW GROUND — PARIS",
+    body: "Golden light, 49°N. ESSEC Business School, Master in Management — apprenticeship track. Paris added the layer engineering doesn't teach: strategy, financial modeling, and how organisations actually adopt what gets built.",
+    meta: "ESSEC · 2025— · PLOT 49°02′N 2°04′E",
+    range: [0.48, 0.56],
   },
   {
     no: "04",
+    act: 3,
     title: "THE FLAGSHIP — ADOPT",
-    body: "The one tower already built. Adopt turns any work task into a qualified GenAI / Copilot use case — fit score, ready-to-paste prompt, adoption guide. The tool qualifies the task; a person makes the call. Built to mirror a real Digital Workplace & GenAI Adoption apprentice job description: the tool that role needs, already working. Next.js 16 · React 19 · Claude.",
+    body: "The tallest tower, lit like a beacon. Adopt turns any work task into a qualified GenAI use case — fit score, ready-to-paste prompt, adoption guide. Built and shipped as sole product owner, made to mirror a real GenAI-adoption apprenticeship description: the tool that role needs, already working.",
     meta: "CITY CENTRE · SHIPPED 2026 · STATUS: LIVE",
-    range: [0.52, 0.72],
+    range: [0.56, 0.72],
     links: [
       { label: "OPEN THE LIVE APP", href: "https://adopt-eight.vercel.app" },
       { label: "HOW IT WORKS", href: "https://github.com/Jawahars07/adopt" },
@@ -57,10 +88,11 @@ export const SHEETS: Sheet[] = [
   },
   {
     no: "05",
+    act: 3,
     title: "THE WORKSHOPS",
-    body: "Smaller builds, all real. WebForge — an AI agent that generates and deploys websites from a one-line brief, over Telegram. Tara — a voice assistant with local Whisper ears and a Claude brain. Rta Living — a smart-home platform, in development. And a drafting office where this city itself was drawn, in code, with zero image assets.",
+    body: "Smaller builds, all real. WebForge — an AI agent that generates and deploys websites from a one-line brief, over Telegram. Tara — a voice assistant that listens locally and thinks with Claude. Rta Living — a smart-home platform, in development. And a drafting office where this city itself was drawn, in code.",
     meta: "WORKSHOP LANE · 2025—2026 · MIXED USE",
-    range: [0.72, 0.88],
+    range: [0.72, 0.8],
     links: [
       { label: "WEBFORGE", href: "https://github.com/Jawahars07/webforge" },
       { label: "TARA", href: "https://github.com/Jawahars07/tara" },
@@ -68,10 +100,19 @@ export const SHEETS: Sheet[] = [
     ],
   },
   {
+    no: "05·B",
+    act: 3,
+    title: "THE INTEGRATION STREET",
+    body: "New city, same method: learn the rules, then build. I work across four languages, and French is the newest — being learned the slow way, in classrooms and cafés. Integration is a build too. It doesn't compile overnight. It's compiling.",
+    meta: "PARIS · 2025— · WORK IN PROGRESS, HONESTLY MARKED",
+    range: [0.8, 0.88],
+  },
+  {
     no: "06",
+    act: 4,
     title: "THE OPEN PLOT",
-    body: "One empty lot, one crane, one fresh blueprint: your team's next tool. Seeking a 12–24 month apprenticeship in France — ESSEC rhythm, shipping from week one.",
-    meta: "CITY EDGE · 2026— · PERMIT: PENDING YOUR CALL",
+    body: "Dusk. One empty lot, one crane. The next building here is yours — a 12–24 month apprenticeship in France, from September 2026. I ship from week one.",
+    meta: "CITY EDGE · SEPT 2026 · PERMIT: PENDING YOUR CALL",
     range: [0.88, 1.001],
     links: [
       { label: "EMAIL ME", href: "mailto:jawaharnaidu07@gmail.com" },
