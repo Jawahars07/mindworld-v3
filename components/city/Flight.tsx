@@ -332,7 +332,11 @@ export function Flight({ children }: FlightProps) {
     // real airliners climb at ~15°, not the path's geometric slope — damp pitch
     posB.y = posA.y + (posB.y - posA.y) * 0.4;
     if (posB.distanceToSquared(posA) > 1e-8) {
-      lookM.lookAt(posB, posA, up); // three's lookAt matrix points +z from eye->target inverse
+      // Matrix4.lookAt(eye, target) sets +Z = eye - target. The aircraft models
+      // (procedural and GLB) carry their nose along -Z, so eye must be the
+      // CURRENT position and target the point ahead — +Z points backwards,
+      // nose flies first. (Reversed args here once had it flying tail-first.)
+      lookM.lookAt(posA, posB, up);
       lookQ.setFromRotationMatrix(lookM);
       ac.quaternion.slerp(lookQ, 0.5);
     }

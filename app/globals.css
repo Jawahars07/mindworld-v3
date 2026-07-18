@@ -28,6 +28,24 @@ body {
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
+/* Hero staged reveal: elements hold hidden until the OS boots (.hero-on on the
+   root), then rise in on per-element transition delays. */
+.hero-stage {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-on .hero-stage {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-stage {
+    transition: none;
+    transform: none;
+  }
+}
+
 ::selection {
   background: rgba(95, 212, 245, 0.35);
 }
@@ -41,4 +59,42 @@ body {
 }
 ::-webkit-scrollbar-track {
   background: transparent;
+}
+
+/* Shiny text sweep — vendored from ReactBits "Shiny Text" (MIT,
+   DavidHDev/react-bits), adapted to the blueprint palette. The npm package of
+   that name is a different project — see skills-lock.json. */
+.shiny-text {
+  color: #ff6a3d;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 106, 61, 0.85) 40%,
+    #ffe8d9 50%,
+    rgba(255, 106, 61, 0.85) 60%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shiny-sweep 3.2s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text {
+    animation: none;
+    background-position: 0% 0;
+  }
+}
+@keyframes shiny-sweep {
+  0% {
+    background-position: 150% 0;
+  }
+  100% {
+    background-position: -50% 0;
+  }
+}
+/* The sweep repaints clipped text every frame — stop paying for it the moment
+   the hero sheet is faded out (its root gets Tailwind's opacity-0). */
+.opacity-0 .shiny-text,
+.opacity-0 .animate-pulse {
+  animation: none;
 }

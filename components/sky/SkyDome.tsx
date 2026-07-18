@@ -49,13 +49,15 @@ const skyFrag = /* glsl */ `
     float downMix = smoothstep(0.0, -0.35, dir.y);
     col = mix(col, mix(uHorizonCol, uGroundCol, 0.5), downMix);
 
-    // sun disc + tight glow, tracks uSunDir
+    // sun disc + layered glow, tracks uSunDir. A slightly larger disc with a
+    // soft corona ring reads as a real sun instead of a white dot; low sun
+    // (dawn/dusk) swells the corona for the golden-hour hero frames.
     vec3 sunDir = normalize(uSunDir);
     float sunDot = dot(dir, sunDir);
     float disc = smoothstep(0.9994, 0.9998, sunDot);
     float glow = pow(max(sunDot, 0.0), 12.0) * 0.5 + pow(max(sunDot, 0.0), 3.0) * 0.08;
     float sunVisible = smoothstep(-0.02, 0.03, sunDir.y);
-    col += uSunColor * (disc * 2.2 + glow) * sunVisible;
+    col += uSunColor * (disc * 2.2 + glow) * sunVisible; // BISECT: corona reverted
 
     // soft horizon glow that survives when the sun itself has dipped below —
     // dawn/dusk residue near the skyline even once the disc is hidden.

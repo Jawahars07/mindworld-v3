@@ -91,10 +91,15 @@ export default function Boot() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, lineCount, chars, reduced, lines]);
 
-  // Skip on any key or click; lock body scroll while the boot screen owns the viewport.
+  // Skip on any key or click; lock body scroll while the boot screen owns the
+  // viewport. preventDefault so scroll keys (space, arrows) only skip the boot
+  // instead of also throwing the page down the runway.
   useEffect(() => {
     if (phase !== "running") return;
-    const skip = () => finish();
+    const skip = (e: Event) => {
+      e.preventDefault();
+      finish();
+    };
     window.addEventListener("keydown", skip);
     window.addEventListener("pointerdown", skip);
     document.documentElement.style.overflow = "hidden";

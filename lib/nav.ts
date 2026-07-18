@@ -1,6 +1,19 @@
 // Programmatic travel along the scroll runway. Everything that moves the camera
 // does it by scrolling the page — ScrollDriver stays the single source of truth.
 // One active tween at a time; any real user input cancels it.
+// When Lenis is active (SmoothScroll.tsx) we scroll through it so the tween and
+// the smoothing engine never fight over scrollTop.
+
+type LenisLike = {
+  scrollTo: (target: number, opts?: { duration?: number; onComplete?: () => void; lock?: boolean }) => void;
+  stop: () => void;
+  start: () => void;
+};
+
+let lenis: LenisLike | null = null;
+export function setLenis(l: LenisLike | null) {
+  lenis = l;
+}
 
 let raf = 0;
 let cancelFns: (() => void)[] = [];
@@ -50,6 +63,20 @@ export function travelTo(
       window.removeEventListener("wheel", onInput);
       window.removeEventListener("touchmove", onInput);
     });
+
+    if (lenis) {
+      // hand the tween to Lenis — one smoothing engine, no scrollTop tug-of-war
+      lenis.scrollTo(to, {
+        duration: duration / 1000,
+        onComplete: () => {
+          if (!cancelled) {
+            cancelTravel();
+            resolve(true);
+          }
+        },
+      });
+      return;
+    }
 
     const step = (now: number) => {
       if (cancelled) return;

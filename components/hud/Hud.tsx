@@ -6,14 +6,21 @@ import { SHEETS, sheetAt } from "@/lib/sheets";
 import { actAt } from "@/lib/path";
 import { SHEET_ROOMS, roomBySlug } from "@/lib/rooms";
 import { trackClick } from "@/lib/analytics";
+import Hero from "@/components/os/Hero";
 
 // All narration lives in the DOM (v2 lesson: no drei <Html> at depth).
 // Identity: architectural drawing title blocks, bottom-left; progress rail, right edge.
 
 export default function Hud() {
-  const [progress, setProgress] = useState(0);
+  // Initialize from the store and re-sync on mount — a scroll that lands before
+  // this component hydrates (browser scroll restoration, first dev compile)
+  // must not leave the hero sheet stuck on screen.
+  const [progress, setProgress] = useState(() => useWorld.getState().progress);
   const setRoomOpen = useWorld((s) => s.setRoomOpen);
-  useEffect(() => useWorld.subscribe((s) => setProgress(s.progress)), []);
+  useEffect(() => {
+    setProgress(useWorld.getState().progress);
+    return useWorld.subscribe((s) => setProgress(s.progress));
+  }, []);
   const sheet = sheetAt(progress);
   const act = actAt(progress);
   const isTitle = sheet.no === "00";
@@ -23,28 +30,8 @@ export default function Hud() {
 
   return (
     <>
-      {/* Sheet 00 hero — centered */}
-      <div
-        className={`hud-fade pointer-events-none fixed inset-0 z-20 flex flex-col items-center justify-center text-center px-6 ${
-          isTitle ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <p className="font-plot text-blueprint/80 text-xs tracking-[0.5em] mb-5">ACT 0 · BLUEPRINT NIGHT</p>
-        <h1 className="text-limestone text-5xl md:text-7xl font-bold tracking-tight leading-none [text-shadow:0_2px_24px_rgba(10,17,40,0.9),0_0_60px_rgba(10,17,40,0.7)]">
-          JAWAHAR NAIDU
-        </h1>
-        <p className="text-inkline mt-5 max-w-md text-base md:text-lg leading-relaxed [text-shadow:0_1px_14px_rgba(10,17,40,0.95)]">
-          Every district below is something real — built, shipped, or lived.
-          <br />
-          Right now it&apos;s a blueprint. Scroll — the sun is coming up on it.
-        </p>
-        <p className="font-plot text-blueprint/90 text-[10px] md:text-xs tracking-[0.3em] mt-6 border border-blueprint/40 px-4 py-2 [text-shadow:0_1px_10px_rgba(10,17,40,0.9)]">
-          SEEKING: 12–24 MONTH APPRENTICESHIP · FRANCE
-        </p>
-        <p className="absolute bottom-8 left-1/2 -translate-x-1/2 font-plot text-blueprint text-xs tracking-[0.35em] animate-pulse motion-reduce:animate-none">
-          ▼ SCROLL
-        </p>
-      </div>
+      {/* Sheet 00 hero — GSAP-staged opening statement */}
+      <Hero visible={isTitle} />
 
       {/* Title block — all other sheets */}
       <div

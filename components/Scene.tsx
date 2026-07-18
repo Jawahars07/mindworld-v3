@@ -17,6 +17,7 @@ import { Workshops } from "./city/Workshops";
 import { OpenPlot } from "./city/OpenPlot";
 import { SkyDome } from "./sky/SkyDome";
 import { Clouds } from "./sky/Clouds";
+import { Birds } from "./sky/Birds";
 import { Flight } from "./city/Flight";
 import { Traffic } from "./city/Traffic";
 import { Crowds } from "./city/Crowds";
@@ -148,6 +149,7 @@ export default function Scene() {
         <CameraRig />
         <SkyDome />
         <Clouds />
+        <Birds />
         <Ground />
 
         {/* ============ ACT 1 — BENGALURU (three sub-quarters) ============ */}

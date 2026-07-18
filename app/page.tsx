@@ -8,6 +8,7 @@ import RecruiterMode from "@/components/os/RecruiterMode";
 import GalaxyGate from "@/components/galaxy/GalaxyGate";
 import Room from "@/components/project/Room";
 import Terminal from "@/components/os/Terminal";
+import SmoothScroll from "@/components/os/SmoothScroll";
 import { SHEETS } from "@/lib/sheets";
 import { ROOMS } from "@/lib/rooms";
 import { REGISTRY } from "@/lib/registry";
@@ -26,6 +27,7 @@ export default function Page() {
       <GalaxyGate />
       <Room />
       <Terminal />
+      <SmoothScroll />
       <Boot />
       {/* scroll runway: 11 sheets / 5 acts ≈ 13 viewport-heights of travel */}
       <div aria-hidden className="h-[1300vh]" />

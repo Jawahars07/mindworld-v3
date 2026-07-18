@@ -177,3 +177,35 @@ SEO 100 / BP 96 / Agentic 100.
 PENDING INPUTS: public/refs (reels), public/photos (prints), public/audio (sound pass skipped —
 no dead code shipped). og.png still shows Blueprint City art.
 GATE: preview deploy only. No merge to main / no production without Jawahar's yes.
+
+---
+
+# MINDWORLD OS — Iteration 2 "masterpiece pass" (2026-07-18, per Jawahar's feedback)
+
+Asks: airliner reversed + weak · headline bland · add sun + birds · integrate lenis/gsap/
+vanta/reactbits · premium bar.
+
+- AIRLINER ROOT FIX: Matrix4.lookAt(eye,target) sets +Z = eye−target; both aircraft models
+  carry the nose along −Z, so lookAt args must be (posA, posB) — was (posB, posA) = tail-first
+  flight. Fixed in Flight.tsx orientation block; verified nose-first at p=0.36/0.40/0.44.
+- SUN: SkyDome disc enlarged + corona layer that swells near the horizon (lowSun factor).
+- BIRDS (components/sky/Birds.tsx): instanced chevron flocks, orbit+flap fully in-shader,
+  4 flocks (BLR sunrise ×2, Paris golden ×2). LESSONS: (1) flat geometry viewed edge-on is
+  invisible — billboard in view space (Crowds lesson, relearned); (2) R3F JSX <instancedMesh>
+  + custom InstancedBufferAttributes failed silently — manual THREE.InstancedMesh via
+  <primitive> (exact Crowds pattern) renders fine. Don't fight it, mirror Crowds.
+- HERO (components/os/Hero.tsx): new statement stack ("I build AI systems people actually
+  use." + boots/runs/real line + shiny SEEKING chip), CSS-stagger reveal keyed off .hero-on
+  (booted). LESSON: a GSAP timeline effect here silently never ran in dev (suspected
+  HMR/store duplication); CSS transitions keyed off a class cannot misfire. Also:
+  .hero-stage owns `transform`, so Tailwind translate utilities on the same node are
+  overridden — center with inset-x-0 instead.
+- BOOT: skip handler now preventDefaults (space was scrolling the runway). Hud initializes
+  progress from the store (scroll-before-hydration left the hero stuck — real user impact
+  with browser scroll restoration).
+- LIBS (security-vetted, pinned, skills-lock.json): lenis 1.3.25 (SmoothScroll.tsx; travelTo
+  routes through lenis.scrollTo — one smoothing engine), gsap 3.15.0 (galaxy zoom-in intro),
+  vanta 0.5.24 (installed; NOT integrated — would fight the R3F scene; candidate: boot bg),
+  react-bits npm = NAME COLLISION (different project) → ReactBits ShinyText vendored as CSS.
+- TEST HARNESS LESSON: headless keyboard events don't reach the window keydown listener —
+  scripts click the SKIP button instead of pressing keys.

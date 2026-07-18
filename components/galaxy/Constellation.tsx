@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import gsap from "gsap";
 import { REGISTRY, CATEGORIES, type Skill } from "@/lib/registry";
 import { useWorld } from "@/lib/store";
 import { trackClick } from "@/lib/analytics";
@@ -94,6 +95,12 @@ export default function Constellation() {
     };
     resize();
     window.addEventListener("resize", resize);
+
+    // arrival: fall into the sky from far out (GSAP on the plain view object)
+    if (!reduced) {
+      view.current.zoom = 0.45;
+      gsap.to(view.current, { zoom: 1, duration: 1.5, ease: "power3.out" });
+    }
 
     const toScreen = (wx: number, wy: number) => {
       const v = view.current;
