@@ -10,6 +10,14 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.resolve(here, "../../agentic-os/registry.json");
 const OUT = path.resolve(here, "../lib/registry.json");
 
+// On Vercel/CI the agentic-os workspace isn't present — the committed
+// lib/registry.json + lib/photos.json snapshots (refreshed on every local
+// build) are the source of truth there. Sync only when the live source exists.
+if (!fs.existsSync(SRC)) {
+  console.log("registry source not present (CI build) — using committed lib/registry.json snapshot");
+  process.exit(0);
+}
+
 const raw = JSON.parse(fs.readFileSync(SRC, "utf8"));
 
 const seen = new Set();
