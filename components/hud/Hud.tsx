@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useWorld } from "@/lib/store";
 import { SHEETS, sheetAt } from "@/lib/sheets";
 import { actAt } from "@/lib/path";
+import { SHEET_ROOMS, roomBySlug } from "@/lib/rooms";
 import { trackClick } from "@/lib/analytics";
 
 // All narration lives in the DOM (v2 lesson: no drei <Html> at depth).
@@ -11,10 +12,14 @@ import { trackClick } from "@/lib/analytics";
 
 export default function Hud() {
   const [progress, setProgress] = useState(0);
+  const setRoomOpen = useWorld((s) => s.setRoomOpen);
   useEffect(() => useWorld.subscribe((s) => setProgress(s.progress)), []);
   const sheet = sheetAt(progress);
   const act = actAt(progress);
   const isTitle = sheet.no === "00";
+  const rooms = (SHEET_ROOMS[sheet.no] ?? [])
+    .map((slug) => roomBySlug(slug))
+    .filter((r): r is NonNullable<typeof r> => r !== null);
 
   return (
     <>
@@ -41,26 +46,6 @@ export default function Hud() {
         </p>
       </div>
 
-      {/* persistent link rail — always one click from proof */}
-      <div className="fixed z-30 top-4 right-4 md:top-6 md:right-6 flex gap-2">
-        {[
-          { label: "CV ↓", href: "/Jawahar_Naidu_CV.pdf" },
-          { label: "EMAIL", href: "mailto:jawaharnaidu07@gmail.com" },
-          { label: "GITHUB", href: "https://github.com/Jawahars07" },
-        ].map((l) => (
-          <a
-            key={l.label}
-            href={l.href}
-            target={l.href.startsWith("http") ? "_blank" : undefined}
-            rel="noreferrer"
-            onClick={() => trackClick(l.label, l.href)}
-            className="font-plot text-[10px] tracking-[0.2em] border border-blueprint/50 bg-night/60 backdrop-blur-sm text-blueprint px-3 py-1.5 hover:bg-blueprint hover:text-night transition-colors"
-          >
-            {l.label}
-          </a>
-        ))}
-      </div>
-
       {/* Title block — all other sheets */}
       <div
         className={`hud-fade fixed z-20 left-4 bottom-4 md:left-8 md:bottom-8 w-[min(92vw,26rem)] ${
@@ -74,6 +59,26 @@ export default function Hud() {
           </div>
           <h2 className="text-limestone text-xl md:text-2xl font-semibold tracking-tight mt-2">{sheet.title}</h2>
           <p className="text-inkline text-[13px] md:text-sm leading-relaxed mt-2">{sheet.body}</p>
+          {rooms.length > 0 && (
+            <div className="flex flex-wrap gap-2 mt-3">
+              {rooms.map((r) => (
+                <button
+                  key={r.slug}
+                  onClick={() => {
+                    trackClick("hud:enter-room", r.slug);
+                    setRoomOpen(r.slug);
+                  }}
+                  className={`font-plot text-[10px] tracking-[0.2em] px-3 py-1.5 transition-colors ${
+                    r.flagship
+                      ? "bg-accent text-night hover:bg-limestone"
+                      : "border border-accent/50 text-accent hover:bg-accent hover:text-night"
+                  }`}
+                >
+                  ⌂ {r.flagship ? "ENTER THE FLAGSHIP" : `ENTER ${r.name}`}
+                </button>
+              ))}
+            </div>
+          )}
           {sheet.links && (
             <div className="flex flex-wrap gap-2 mt-3">
               {sheet.links.map((l) => (

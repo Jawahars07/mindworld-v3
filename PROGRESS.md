@@ -136,3 +136,44 @@ assets 52KB models + 752KB draco decoders, budget ≤8MB.
 Preview: https://mindworld-v3-git-v4-city-compiles-jawaharnaidu07-5427s-projects.vercel.app
 (SSO-protected — Jawahar opens it logged into Vercel; token couldn't mint bypass link, so E2E ran
 on the identical local prod build instead). GATE: no merge to main / no production until approval.
+
+---
+
+# MINDWORLD OS (on top of v4, branch v4-city-compiles, 2026-07-17/18) — AT GATE
+
+The OS shell over the City Compiles film. New systems, all DOM layers over the Canvas:
+- Boot.tsx — cold boot typing REAL system data (skill counts from live registry), skippable,
+  once/session (mw:booted). Reduced-motion: instant lines (reads media query directly — the
+  store flag arrives late via dynamic Scene import).
+- TopBar/Dock/CommandPalette — persistent OS chrome; ⌘K palette (GO/DO/LINK actions);
+  backtick/~ opens the terminal. TopBar absorbed the old Hud link rail.
+- RecruiterMode.tsx — 90s autopilot: 6 beats (who → BLR → Adopt ×2 → galaxy 12s → ask) driving
+  window scroll via lib/nav.ts travelTo (ScrollDriver stays the single source of truth; any
+  wheel/touch/Esc hands control back). AUTO-STARTS on mobile (<760px) once per session (mw:toured).
+  Ends on a close card: CV + email.
+- Constellation.tsx (+GalaxyGate lazy) — Canvas2D port of the agentic-os galaxy fed by
+  lib/registry.json, synced at prebuild from ../agentic-os/registry.json with realpath dedupe
+  (scripts/sync-registry.mjs). 261 skills · 13 authored at last sync — ALL counts render from
+  data, never hardcoded. Search dims, click picks a star, drag/wheel pan-zoom, seeded layout.
+- Room.tsx + lib/rooms.ts — 6 project rooms (adopt flagship · webforge · tara · rta · co2 ·
+  mindworld). Facts traced to sheets.ts/wiki; NO invented metrics; Adopt seed stats never cited.
+  Photos pending → pinned-print placeholder via build-time lib/photos.json manifest (no 404s).
+- Terminal.tsx — whoami, ls projects, ls skills, run adopt, sudo hire (mailto), mindworld
+  (sun toggle via scroll), help/clear/exit. Voice: short, honest.
+- StaticFallback + sr-only article extended with OS/registry/rooms parity. Metadata renamed
+  MINDWORLD OS.
+
+LESSONS: (1) shoot/fps scripts must pre-seed mw:booted AND mw:toured or the mobile auto-tour
+fights the scripted scroll (caught as desynced mobile sweep). (2) /_vercel/insights/script.js
+404s on local prod ALWAYS — not a defect, filter it. (3) Missing images: manifest at build time
+beats onError fallbacks (zero console 404s). (4) label-content-name-mismatch: aria-label must
+contain the visible text (⌘K button).
+
+VERIFIED (2026-07-18): tsc clean · build clean 6/6 static · 16-pt desktop + 7-pt mobile prod
+sweeps read, zero console errors (excl. known insights 404) · boot/palette/tour/galaxy/rooms/
+terminal each screenshot-verified · reduced-motion boot instant + galaxy static · 60fps flat at
+1440x900 AND 390x844 (metal, p=0.21/0.6/0.76) · assets 1.7MB ≤ 8MB · Lighthouse A11y 100 /
+SEO 100 / BP 96 / Agentic 100.
+PENDING INPUTS: public/refs (reels), public/photos (prints), public/audio (sound pass skipped —
+no dead code shipped). og.png still shows Blueprint City art.
+GATE: preview deploy only. No merge to main / no production without Jawahar's yes.

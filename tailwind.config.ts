@@ -11,6 +11,7 @@ const config: Config = {
         limestone: "#E8DCC8",
         amber: "#FFB454",
         inkline: "#9FB4C8",
+        accent: "#FF6A3D",
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],

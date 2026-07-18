@@ -5,6 +5,11 @@ const pts = (process.argv[5] || "0.21,0.6,0.76").split(",").map(Number);
 const browser = await chromium.launch({ channel: "chrome", headless: true,
   args: ["--use-angle=metal"] });
 const page = await browser.newPage({ viewport: { width: w, height: h } });
+// measure the film, not the boot/tour overlays
+await page.addInitScript(() => {
+  sessionStorage.setItem("mw:booted", "1");
+  sessionStorage.setItem("mw:toured", "1");
+});
 await page.goto(url, { waitUntil: "networkidle" });
 await page.waitForTimeout(2500);
 for (const p of pts) {

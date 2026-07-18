@@ -16,6 +16,12 @@ const browser = await chromium.launch({
   args: ["--use-gl=angle", "--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
 });
 const page = await browser.newPage({ viewport: { width, height } });
+// skip the OS boot sequence and the mobile auto-tour — film shots verify the
+// world; shoot-boot.mjs and shoot-tour.mjs verify those flows on their own
+await page.addInitScript(() => {
+  sessionStorage.setItem("mw:booted", "1");
+  sessionStorage.setItem("mw:toured", "1");
+});
 page.on("console", (m) => {
   if (m.type() === "error") console.log("[console.error]", m.text());
 });

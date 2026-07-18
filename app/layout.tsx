@@ -20,9 +20,9 @@ const plot = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Jawahar Naidu — Blueprint City",
+  title: "Jawahar Naidu — MINDWORLD OS",
   description:
-    "A 3D city that compiles as you scroll. Jawahar Naidu turns AI into adopted business outcomes — Bengaluru to Paris, ESSEC MIM, seeking a 12–24 month AI transformation / digital apprenticeship in France.",
+    "Not a portfolio — a working system you can walk through. It boots on live data, travels one continuous route from Bengaluru to Paris, and everything in it is real. ESSEC MIM, seeking a 12–24 month AI transformation apprenticeship in France.",
   metadataBase: new URL("https://jawaharnaidu.com"),
   alternates: { canonical: "https://jawaharnaidu.com" },
   keywords: [
@@ -43,14 +43,14 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   verification: { google: "Zm1PrT69rL-AL0AVEGMW4w55jzhVbyOdFXtN5t5dkes" },
   openGraph: {
-    title: "Jawahar Naidu — Blueprint City",
-    description: "A 3D city that compiles as you scroll. AI adopted into real business outcomes — strategy first. Seeking a 12–24 month apprenticeship in France.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Blueprint City — Jawahar Naidu's portfolio" }],
+    title: "Jawahar Naidu — MINDWORLD OS",
+    description: "Not a portfolio — a working system you can walk through. It boots, it runs, and everything in it is real. Seeking a 12–24 month apprenticeship in France.",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "MINDWORLD OS — Jawahar Naidu's personal operating system" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jawahar Naidu — Blueprint City",
-    description: "A 3D city that compiles as you scroll. AI adopted into real business outcomes — strategy first.",
+    title: "Jawahar Naidu — MINDWORLD OS",
+    description: "Not a portfolio — a working system you can walk through. It boots, it runs, and everything in it is real.",
     images: ["/og.png"],
   },
 };

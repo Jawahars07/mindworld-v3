@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/sync-registry.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -14,6 +15,7 @@
     "@react-three/fiber": "^9.6.1",
     "@react-three/postprocessing": "^3.0.4",
     "@vercel/analytics": "^2.0.1",
+    "framer-motion": "^12.42.2",
     "next": "16.2.9",
     "postprocessing": "^6.39.2",
     "react": "^19.2.0",
