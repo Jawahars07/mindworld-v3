@@ -159,12 +159,13 @@ function Flock({ seed, count, center, spread, appearRange }: FlockProps) {
 export function Birds() {
   return (
     <>
-      {/* sunrise wheeling over Bengaluru — placed inside the camera look-cones */}
-      <Flock seed={101} count={14} center={[-16, 15, -54]} spread={22} appearRange={[0.1, 0.3]} />
-      <Flock seed={137} count={9} center={[10, 16, -80]} spread={16} appearRange={[0.14, 0.31]} />
-      {/* golden hour over Paris — sky above the flagship, then the workshop lane */}
-      <Flock seed={211} count={12} center={[4, 27, -256]} spread={22} appearRange={[0.5, 0.72]} />
-      <Flock seed={251} count={10} center={[-6, 13, -318]} spread={18} appearRange={[0.72, 0.87]} />
+      {/* sunrise wheeling over Bengaluru — placed inside the camera look-cones.
+          Thinned to a sparse, elegant few (was 14/9) — birds read as accent, not swarm. */}
+      <Flock seed={101} count={6} center={[-16, 15, -54]} spread={26} appearRange={[0.1, 0.3]} />
+      <Flock seed={137} count={4} center={[10, 16, -80]} spread={18} appearRange={[0.14, 0.31]} />
+      {/* golden hour over Paris — sky above the flagship, then the workshop lane (was 12/10). */}
+      <Flock seed={211} count={6} center={[4, 27, -256]} spread={26} appearRange={[0.5, 0.72]} />
+      <Flock seed={251} count={4} center={[-6, 13, -318]} spread={20} appearRange={[0.72, 0.87]} />
     </>
   );
 }
